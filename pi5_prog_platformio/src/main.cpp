@@ -16,7 +16,7 @@ const int chipSelect = 4;
  
 void setup()
 {
-  Serial.begin(9600); //INICIALIZA A SERIAL // # GUSTA AEWWWWWWW
+  Serial.begin(9600); //INICIALIZA A SERIAL
   dht.begin(); //INICIALIZA A FUNÇÃO
   delay(2000); //INTERVALO DE 2 SEGUNDO ANTES DE INICIAR
   
