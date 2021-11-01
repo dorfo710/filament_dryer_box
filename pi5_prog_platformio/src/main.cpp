@@ -8,7 +8,7 @@ SdFile meuArquivo;
 RTC_DS3231 rtc;
 
 
-
+#comentario laura
 #include "DHT.h" //INCLUSÃO DE BIBLIOTECA
 
 #define DHTPIN 15 //PINO DIGITAL UTILIZADO PELO DHT22
