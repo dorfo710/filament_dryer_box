@@ -8,14 +8,14 @@ SdFile meuArquivo;
 RTC_DS3231 rtc;
 
 
-#comentario laura
+//#comentario laura
 #include "DHT.h" //INCLUSÃO DE BIBLIOTECA
 
 #define DHTPIN 15 //PINO DIGITAL UTILIZADO PELO DHT22
 #define DHTTYPE DHT22 //DEFINE O MODELO DO SENSOR (DHT22 / AM2302)
 
 DHT dht(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
-
+//-
 // Pino ligado ao CS do modulo
 const int chipSelect = 5;
 String Dados;
