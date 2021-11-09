@@ -1,7 +1,7 @@
 #include <SdFat.h>
 #include <EEPROM.h>
 #include <Wire.h>
-#include "RTClib.h"
+#include <RTClib.h>
 
 SdFat sdCard;
 SdFile meuArquivo;
@@ -20,7 +20,7 @@ RTC_DS3231 rtc;
 #define Resit 17
 #define Piezo 25
 #define Vent1 26
-#define Vent2 27
+//#define Vent2 27
 
 DHT dht(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
 DHT dht2(DHTPIN2, DHTTYPE);
