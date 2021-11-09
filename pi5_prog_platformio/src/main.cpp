@@ -1,7 +1,7 @@
 #include <SdFat.h>
 #include <EEPROM.h>
 #include <Wire.h>
-#include "RTClib.h"
+#include <RTClib.h>
 
 SdFat sdCard;
 SdFile meuArquivo;
@@ -9,12 +9,21 @@ RTC_DS3231 rtc;
 
 
 //#comentario laura
-#include "DHT.h" //INCLUSÃO DE BIBLIOTECA
+#include <DHT.h> //INCLUSÃO DE BIBLIOTECA
 
 #define DHTPIN 15 //PINO DIGITAL UTILIZADO PELO DHT22
 #define DHTTYPE DHT22 //DEFINE O MODELO DO SENSOR (DHT22 / AM2302)
 
+#define DHTPIN2 16
+
+
+#define Resit 17
+#define Piezo 25
+#define Vent1 26
+//#define Vent2 27
+
 DHT dht(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
+DHT dht2(DHTPIN2, DHTTYPE);
 //-
 // Pino ligado ao CS do modulo
 const int chipSelect = 5;
@@ -160,6 +169,8 @@ void loop()
 
     Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second()) + ";" + String(umidade) + ";" + String(temperatura) + ";" ;
     meuArquivo.println(Dados);
+
+
     atual = millis();
     digitalWrite(2, HIGH);
     delay(500);
