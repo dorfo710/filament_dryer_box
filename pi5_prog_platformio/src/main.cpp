@@ -14,6 +14,14 @@ RTC_DS3231 rtc;
 #define DHTPIN 15 //PINO DIGITAL UTILIZADO PELO DHT22
 #define DHTTYPE DHT22 //DEFINE O MODELO DO SENSOR (DHT22 / AM2302)
 
+#define DHTPIN2 16
+#define DHTTYPE DHT22
+
+#define Resit 17
+#define Piezo 25
+#define Vent1 26
+#define Vent2 27
+
 DHT dht(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
 //-
 // Pino ligado ao CS do modulo
@@ -160,6 +168,8 @@ void loop()
 
     Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second()) + ";" + String(umidade) + ";" + String(temperatura) + ";" ;
     meuArquivo.println(Dados);
+
+
     atual = millis();
     digitalWrite(2, HIGH);
     delay(500);
