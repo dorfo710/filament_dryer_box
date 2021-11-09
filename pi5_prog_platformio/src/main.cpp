@@ -15,7 +15,7 @@ RTC_DS3231 rtc;
 #define DHTTYPE DHT22 //DEFINE O MODELO DO SENSOR (DHT22 / AM2302)
 
 #define DHTPIN2 16
-#define DHTTYPE DHT22
+
 
 #define Resit 17
 #define Piezo 25
@@ -23,6 +23,7 @@ RTC_DS3231 rtc;
 #define Vent2 27
 
 DHT dht(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
+DHT dht2(DHTPIN2, DHTTYPE);
 //-
 // Pino ligado ao CS do modulo
 const int chipSelect = 5;
