@@ -1,5 +1,5 @@
 
-#include <iostream>
+// #include <iostream>
 using namespace std;
 class Controler {
 
@@ -16,6 +16,16 @@ public:
 
     bool temp_control_state;
     bool humidity_control_state;
+
+    void Set_temp_pwm_config(int Frequency, int Channel, int Resolution)
+    {
+
+    }
+
+    void Set_hum_pwm_config(int Frequency, int Channel, int Resolution)
+    {
+
+    }
 
     void Set_desired_temperature(float DT)
     {
@@ -165,3 +175,6 @@ void gpio_task(void *pvParameters) {
 
 	vTaskDelete(NULL);
 }
+
+// mais codigo de teste eu montei um mini setup pra testar aqui
+int Saida pwm = 0
