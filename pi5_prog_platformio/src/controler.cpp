@@ -4,8 +4,6 @@ using namespace std;
 class Controler {
 
 public:
-    float curr_temperature;
-    float curr_humidity;
 
     float Desired_temperature;
     float Desired_humidity;
@@ -87,12 +85,19 @@ public:
         else
         {
             int dummy_DutyCycle = 5;
+            if (curr_humidity < Desired_humidity)
+            {
             ledcWrite(humidity_PWM_CHANNEL, dummy_DutyCycle);
+            }
+            else
+            {
+            ledcWrite(humidity_PWM_CHANNEL, 0);
+            }
         }
     }
 
 };
-// DAQUI PARA BAIXO É CODIGO EM CONSTRUÇÃO :)
+// ******************************************************************************************************* DAQUI PARA BAIXO É CODIGO EM CONSTRUÇÃO :) *****************************************************************************************
 
 #include <stdio.h>
 #include <string.h>
