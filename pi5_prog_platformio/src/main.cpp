@@ -3,6 +3,9 @@
 #include <Wire.h>
 #include "RTClib.h"
 
+#include "controler.cpp"
+#include "Leitura.h"
+
 SdFat sdCard;
 SdFile meuArquivo;
 RTC_DS3231 rtc;
@@ -16,7 +19,6 @@ RTC_DS3231 rtc;
 
 #define DHTPIN2 16 //14
 
-
 #define Resit 17
 #define Piezo 25
 #define Vent1 26
@@ -25,20 +27,22 @@ RTC_DS3231 rtc;
 DHT dht(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
 DHT dht2(DHTPIN2, DHTTYPE);
 //-
-// Pino ligado ao CS do modulo
-const int chipSelect = 5;
-String Dados;
-int tempoDelay = 6000;
-char tempo[7];
-unsigned int atual = 0;
-char VetorTempo[17];
+// // Pino ligado ao CS do modulo
+// const int chipSelect = 5;
+// String Dados;
+// int tempoDelay = 6000;
+// char tempo[7];
+// unsigned int atual = 0;
+// char VetorTempo[17];
+// 
+// 
+// int ano = 0;
+// int mes = 0;
+// int dia = 0, AuxDia = 0;
+// int hora = 0;
+// int minuto = 0;
 
-
-int ano = 0;
-int mes = 0;
-int dia = 0, AuxDia = 0;
-int hora = 0;
-int minuto = 0;
+// dorfo - criei um file time_rtc pra declarar essas variaveis do timer
 
 void setup()
 {
