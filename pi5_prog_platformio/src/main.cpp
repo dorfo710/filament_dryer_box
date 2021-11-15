@@ -27,20 +27,20 @@ RTC_DS3231 rtc;
 DHT dht(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
 DHT dht2(DHTPIN2, DHTTYPE);
 //-
-// // Pino ligado ao CS do modulo
-// const int chipSelect = 5;
-// String Dados;
-// int tempoDelay = 6000;
-// char tempo[7];
-// unsigned int atual = 0;
-// char VetorTempo[17];
-// 
-// 
-// int ano = 0;
-// int mes = 0;
-// int dia = 0, AuxDia = 0;
-// int hora = 0;
-// int minuto = 0;
+// Pino ligado ao CS do modulo
+const int chipSelect = 5;
+String Dados;
+int tempoDelay = 6000;
+char tempo[7];
+unsigned int atual = 0;
+char VetorTempo[17];
+
+
+int ano = 0;
+int mes = 0;
+int dia = 0, AuxDia = 0;
+int hora = 0;
+int minuto = 0;
 
 // dorfo - criei um file time_rtc pra declarar essas variaveis do timer
 
@@ -59,7 +59,7 @@ void setup()
   Serial.println("(▀̿Ĺ̯▀̿) Instrunção ✍(◔◡◔)");
   Serial.println("Para gravar outros valores de ciclo,\ndigite na caixa serial 'T' e o tempo desejado em milisegundos.");
   Serial.println("Exemplo, T1000 para 1000 milisegundos, 1 segundo (>‿◠)✌");
-  Serial.println("Tempo maximo pode ser ajustado até 2 horas e 46 minutos ♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪");
+  Serial.println("Tempo maximo pode ser ajustado até 2 horas e 46 minutos ♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪"); // tem que aumentar esse tempo de algum jeito
   delay(10000);
   if (EEPROM.readInt(2) < 6000) {
     tempoDelay = EEPROM.readInt(2);
