@@ -1,5 +1,11 @@
 //Só exemplos para começar :)
 
+#ifndef _Leitura_H_
+#define _Leitura_H_
+
+#include <Arduino.h>
+
+
 class Leitura {
     private: // As variáveis membro são privadas (encapsulamento)
         double Temp, Umid;
@@ -18,5 +24,7 @@ class Leitura {
         double getUmid();
         int getResist();
         int getPiezo();
-        int getRVent();
+        int getRVent1();
+        int getRVent2();
 };
+#endif
