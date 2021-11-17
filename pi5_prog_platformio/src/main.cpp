@@ -3,6 +3,7 @@
 #include <Wire.h>
 #include "RTClib.h"
 
+#include "time_rtc.h"
 #include "controler.cpp"
 #include "Leitura.h"
 
@@ -20,10 +21,12 @@ RTC_DS3231 rtc;
 #define DHTPIN2 14 
 
 // Passado para o Leitura.cpp
+/*
 #define Resistencia_Port 17
 #define Piezo_Port 25
 #define Vent1_port 26
 #define Vent2_port 27
+*/
 // Fim passagem
 
 DHT dht(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
