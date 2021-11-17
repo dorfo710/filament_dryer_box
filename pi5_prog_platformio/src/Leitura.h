@@ -26,5 +26,6 @@ class Leitura {
         int getPiezo();
         int getRVent1();
         int getRVent2();
+        void SdCard();
 };
 #endif
