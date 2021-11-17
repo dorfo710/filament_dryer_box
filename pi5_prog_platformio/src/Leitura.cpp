@@ -118,11 +118,14 @@ void Leitura::SdCard()
     }
 
     // Grava Cartão
-    Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second()) + ";" + String(umidade) + ";" + String(temperatura) + ";" ;
-    meuArquivo.println(Dados); 
-     
+    DateTime now = rtc.now();
+    Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" 
+    + String(now.minute()) + ":" + String(now.second()) + ";" + String(Umid) + ";" + String(Temp) + ";";
+    meuArquivo.println(Dados);
+
     //Encerra Cartão
     Serial.println("(˘͜ʖ˘) Processo de gravacao interrompido. Retire o SD! ٩(^ᴗ^)۶");
     meuArquivo.close();
 }
+
 // falta fazer parte do main.cpp
