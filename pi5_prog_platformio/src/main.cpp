@@ -17,16 +17,19 @@ RTC_DS3231 rtc;
 #define DHTPIN 15 //PINO DIGITAL UTILIZADO PELO DHT22
 #define DHTTYPE DHT22 //DEFINE O MODELO DO SENSOR (DHT22 / AM2302)
 
-#define DHTPIN2 16 //14
+#define DHTPIN2 14 
 
-#define Resit 17
-#define Piezo 25
-#define Vent1 26
-//#define Vent2 27
+// Passado para o Leitura.cpp
+#define Resistencia_Port 17
+#define Piezo_Port 25
+#define Vent1_port 26
+#define Vent2_port 27
+// Fim passagem
 
 DHT dht(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
 DHT dht2(DHTPIN2, DHTTYPE);
-//-
+
+
 // Pino ligado ao CS do modulo
 const int chipSelect = 5;
 String Dados;
@@ -66,7 +69,8 @@ void setup()
   }
 
   Serial.println((String)"Ciclo: " + tempoDelay);
-
+  
+  //Passado Para Leitura.h      Leitura::SdCard()
   // Inicializa o modulo SD
   if (!sdCard.begin(chipSelect, SPI_HALF_SPEED))sdCard.initErrorHalt();
   // Abre o arquivo LER_POT.TXT
@@ -74,6 +78,7 @@ void setup()
   {
     sdCard.errorHalt("(┛◉Д◉)┛彡┻━┻ Erro na abertura do arquivo LER_POT.TXT! (×_×)");
   }
+  //Fim passagem Leitura::SdCard()
 }
 
 void loop()
@@ -83,11 +88,14 @@ void loop()
   if (analogRead(13) > 600)
   {
     // Interrompe o processo e fecha o arquivo
+    // Passado Leitura.h  Leitura::SdCard()
     Serial.println("(˘͜ʖ˘) Processo de gravacao interrompido. Retire o SD! ٩(^ᴗ^)۶");
     meuArquivo.close();
+    //Fim passagem.
     while (1) {}
   }
   if (Serial.available() > 0) {
+    #pragma region 
     /*
       if (Serial.read() == 'D') {
       delay(10);
@@ -130,6 +138,8 @@ void loop()
       rtc.adjust(DateTime(ano, mes, dia, hora, minuto, 0));
       Serial.println();
       }*/
+      #pragma endregion
+
     if (Serial.read() == 'T') {
       delay(10);
       tempo[0] = Serial.read();
@@ -171,9 +181,10 @@ void loop()
     Serial.print(":");
     Serial.println(now.second(), DEC);
 
+    //Passado para Leitura.h  Leitura::SdCard()
     Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second()) + ";" + String(umidade) + ";" + String(temperatura) + ";" ;
     meuArquivo.println(Dados);
-
+    // Fim passagem 
 
     atual = millis();
     digitalWrite(2, HIGH);
