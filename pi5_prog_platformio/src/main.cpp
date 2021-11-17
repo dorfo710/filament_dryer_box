@@ -32,18 +32,19 @@ DHT dht2(DHTPIN2, DHTTYPE);
 
 // Pino ligado ao CS do modulo
 const int chipSelect = 5;
+
+/*
 String Dados;
 int tempoDelay = 6000;
 char tempo[7];
 unsigned int atual = 0;
 char VetorTempo[17];
-
-
 int ano = 0;
 int mes = 0;
 int dia = 0, AuxDia = 0;
 int hora = 0;
 int minuto = 0;
+*/
 
 // dorfo - criei um file time_rtc pra declarar essas variaveis do timer
 
@@ -68,9 +69,10 @@ void setup()
     tempoDelay = EEPROM.readInt(2);
   }
 
-  Serial.println((String)"Ciclo: " + tempoDelay);
+  //Serial.println((String)"Ciclo: " + tempoDelay);
   
   //Passado Para Leitura.h      Leitura::SdCard()
+  /*
   // Inicializa o modulo SD
   if (!sdCard.begin(chipSelect, SPI_HALF_SPEED))sdCard.initErrorHalt();
   // Abre o arquivo LER_POT.TXT
@@ -79,6 +81,7 @@ void setup()
     sdCard.errorHalt("(┛◉Д◉)┛彡┻━┻ Erro na abertura do arquivo LER_POT.TXT! (×_×)");
   }
   //Fim passagem Leitura::SdCard()
+  */
 }
 
 void loop()
@@ -88,10 +91,12 @@ void loop()
   if (analogRead(13) > 600)
   {
     // Interrompe o processo e fecha o arquivo
-    // Passado Leitura.h  Leitura::SdCard()
+    // Passado Leitura.h  Leitura::SdCard() 
+    /*
     Serial.println("(˘͜ʖ˘) Processo de gravacao interrompido. Retire o SD! ٩(^ᴗ^)۶");
     meuArquivo.close();
     //Fim passagem.
+    */
     while (1) {}
   }
   if (Serial.available() > 0) {
@@ -163,7 +168,7 @@ void loop()
 
   //leitura de umidade e temperatura
   if (millis() - atual > tempoDelay) {
-    int umidade = (dht.readHumidity());
+   /* int umidade = (dht.readHumidity());
     int temperatura = (dht.readTemperature());
 
     Serial.print((String)"Umidade: " + umidade + "%"); //IMPRIME O TEXTO NA SERIAL
@@ -182,8 +187,10 @@ void loop()
     Serial.println(now.second(), DEC);
 
     //Passado para Leitura.h  Leitura::SdCard()
+    /*
     Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second()) + ";" + String(umidade) + ";" + String(temperatura) + ";" ;
     meuArquivo.println(Dados);
+    */
     // Fim passagem 
 
     atual = millis();
