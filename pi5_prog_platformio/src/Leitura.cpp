@@ -85,7 +85,8 @@ double Leitura::getUmid()
 { //Recupera umidade media
     int umidade1 = dht1.readHumidity();
     int umidade2 = dht2.readHumidity();
-    Umid = (umidade1 + umidade2) / 2 return Umid;
+    Umid = (umidade1 + umidade2) / 2;
+    return Umid;
 }
 int Leitura::getResist()
 { //Recupera o estado da Resistência
@@ -119,8 +120,7 @@ void Leitura::SdCard()
 
     // Grava Cartão
     DateTime now = rtc.now();
-    Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" 
-    + String(now.minute()) + ":" + String(now.second()) + ";" + String(Umid) + ";" + String(Temp) + ";";
+    Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second()) + ";" + String(Umid) + ";" + String(Temp) + ";";
     meuArquivo.println(Dados);
 
     //Encerra Cartão
