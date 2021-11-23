@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Leitura.h"
+#include "time_rtc.h"
 using namespace std;
 
 #define Resistencia_Port 17
@@ -18,6 +19,7 @@ Leitura::Leitura()
     Resist = 0;
     Piezo = 0;
     Vent = 0;
+    Vent2 = 0;
     cout << "Construindo(1) um objeto da classe Leitura!" << endl;
 }
 //Construtor Sobrecarregado - Recebe o raio do circulo
@@ -52,26 +54,6 @@ Leitura::~Leitura()
     //Imprime o texto indicado que o objeto está sendo destruido
     cout << "Destruindo o objeto da classe Ci l rc e!" << endl;
 }
-#pragma region Definição dos Estados
-/*
-//Métodos Modificadores
-void Leitura::setTemp(double T){ //Ajusta o raio do círculo
-    Temp = T;
-}
-void Leitura::setUmid(double U){//Ajusta a coordenada X do Centro
-    Umid = U;
-}
-void Leitura::setResist(int R){ ////Ajusta a coordenada Y do Centro
-    Resist = R;
-}
-void Leitura::setPiezo(int P){
-    Piezo = P;
-}
-void Leitura::setVent(int V){
-    Vent = V;
-}
-*/
-#pragma endregion
 
 //Métodos Acessores
 double Leitura::getTemp()
@@ -105,7 +87,7 @@ int Leitura::getVent1()
 }
 int Leitura::getVent2()
 { //Recupera o valor da ventoinha 2
-    Vent = digitalRead(Vent2_port);
+    Vent2 = digitalRead(Vent2_port);
     return Vent;
 }
 void Leitura::SdCard()
@@ -127,5 +109,3 @@ void Leitura::SdCard()
     Serial.println("(˘͜ʖ˘) Processo de gravacao interrompido. Retire o SD! ٩(^ᴗ^)۶");
     meuArquivo.close();
 }
-
-// falta fazer parte do main.cpp
