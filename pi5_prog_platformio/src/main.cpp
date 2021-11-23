@@ -23,7 +23,6 @@ RTC_DS3231 rtc;
 DHT dht(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
 DHT dht2(DHTPIN2, DHTTYPE);
 
-
 // Pino ligado ao CS do modulo
 const int chipSelect = 5;
 void setup()
