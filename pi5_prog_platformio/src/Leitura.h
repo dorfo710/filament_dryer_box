@@ -9,7 +9,7 @@
 class Leitura {
     private: // As variáveis membro são privadas (encapsulamento)
         double Temp, Umid;
-        int Resist, Piezo, Vent;
+        int Resist, Piezo, Vent, Vent2;
     public: // Os métodos sao públicos
         Leitura(); //Construtores (sobrecarregado)
         Leitura(double, int);
@@ -24,8 +24,8 @@ class Leitura {
         double getUmid();
         int getResist();
         int getPiezo();
-        int getRVent1();
-        int getRVent2();
+        int getVent1();
+        int getVent2();
         void SdCard();
 };
 #endif
