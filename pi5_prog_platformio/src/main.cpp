@@ -60,7 +60,8 @@ void setup()
     Serial.println("Não foi possível encontrar RTC");
     while (1);
   }
-  dht.begin(); //INICIALIZA A FUNÇÃO
+  dht1.begin(); 
+  dht2.begin();
   delay(500);
   Serial.println("\n \n \n");
   Serial.println("(▀̿Ĺ̯▀̿) Instrunção ✍(◔◡◔)");
