@@ -1,5 +1,6 @@
 
 // #include <iostream>
+#include <Arduino.h>
 using namespace std;
 class Controler {
 
@@ -114,8 +115,6 @@ public:
 #include "driver/gpio.h"
 
 #include "sdkconfig.h"
-
-#include "gpio_task.h"
 
 #define GPIO_INPUT     0
 #define GPIO_OUTPUT    13
