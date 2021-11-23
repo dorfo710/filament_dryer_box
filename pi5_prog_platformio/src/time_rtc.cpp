@@ -9,7 +9,7 @@ Hora::Hora(){
   
 }
 
-void Hora::Definir(int hora, int minuto, int dia, int mes, int ano) {    
+int Hora::Definir(int hora, int minuto, int dia, int mes, int ano) {    
     rtc.adjust(DateTime(ano, mes, dia, hora, minuto, 0));
 
 }
