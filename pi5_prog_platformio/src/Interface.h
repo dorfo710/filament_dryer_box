@@ -3,13 +3,13 @@
 
 #include <Arduino.h>
 
+class Interface
+{
 
-class Interface{
-
-	private:
-    
-	public:
-			
+private:
+public:
+	Interface(); //Construtores (sobrecarregado)
+	void NexRtcDefinir();
+	void NexRtcPrint();
 };
 #endif
-
