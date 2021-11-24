@@ -2,7 +2,15 @@
 
 #include <iostream>
 #include "Leitura.h"
+#include "main.cpp"
 #include "time_rtc.h"
+
+
+#include "SdFat.h"
+#include <Wire.h>
+#include "RTClib.h"
+#include <DHT.h>
+#include <Nextion.h>
 
 using namespace std;
 
@@ -10,6 +18,19 @@ using namespace std;
 #define Piezo_Port 25
 #define Vent1_port 26
 #define Vent2_port 27
+
+#define DHTPIN 15     //PINO DIGITAL UTILIZADO PELO DHT22
+#define DHTPIN2 14
+#define DHTTYPE DHT22 //DEFINE O MODELO DO SENSOR (DHT22 / AM2302)
+
+
+DHT dht1(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
+DHT dht2(DHTPIN2, DHTTYPE);
+
+SdFat sdCard;
+SdFile meuArquivo;
+RTC_DS3231 rtc;
+const int chipSelect = 5;
 
 
 //Construtor padrão não recebe nenhum parâmetro
@@ -104,7 +125,7 @@ void Leitura::SdCard()
 
     // Grava Cartão
     DateTime now = rtc.now();
-    Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second()) + ";" + String(Umid) + ";" + String(Temp) + ";";
+    String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second()) + ";" + String(Umid) + ";" + String(Temp) + ";";
     meuArquivo.println(Dados);
 
     //Encerra Cartão
