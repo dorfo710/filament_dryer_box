@@ -1,5 +1,15 @@
 #include <iostream>
 #include "time_rtc.h"
+#include "SdFat.h"
+#include <EEPROM.h>
+#include <Wire.h>
+#include "RTClib.h"
+#include <DHT.h>
+
+#include "time_rtc.h"
+
+RTC_DS3231 rtc;
+
 using namespace std;
 
 Hora::Hora()
