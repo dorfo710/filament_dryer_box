@@ -3,15 +3,13 @@
 
 #include <Arduino.h>
 
+class Hora
+{
 
-class Hora{
-
-	private:
-	public:
-		Hora();
-        char Atual(int, int, int, int, int);
-        int Definir();	
-			
+private:
+public:
+	Hora();
+	String Atual();
+	void Definir(int, int, int, int, int);
 };
 #endif
-
