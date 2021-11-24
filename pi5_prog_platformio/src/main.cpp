@@ -15,7 +15,7 @@
 SdFat sdCard;
 SdFile meuArquivo;
 RTC_DS3231 rtc;
-//Interface Interface;
+Interface Interface;
 
 //Nextion
 NexButton b0 = NexButton(0, 26, "b14");
