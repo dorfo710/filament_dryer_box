@@ -3,12 +3,14 @@
 #include <iostream>
 #include "Leitura.h"
 #include "time_rtc.h"
+
 using namespace std;
 
 #define Resistencia_Port 17
 #define Piezo_Port 25
 #define Vent1_port 26
 #define Vent2_port 27
+
 
 //Construtor padrão não recebe nenhum parâmetro
 //Este construtor sempre está presente mesmo que não tenha sido Declarado
