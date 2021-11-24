@@ -5,27 +5,23 @@
 
 #include <Arduino.h>
 
+class Leitura
+{
+private: // As variáveis membro são privadas (encapsulamento)
+    double Temp, Umid;
+    int Resist, Piezo, Vent, Vent2;
 
-class Leitura {
-    private: // As variáveis membro são privadas (encapsulamento)
-        double Temp, Umid;
-        int Resist, Piezo, Vent, Vent2;
-    public: // Os métodos sao públicos
-        Leitura(); //Construtores (sobrecarregado)
-        Leitura(double, int);
-        Leitura(double, double, int, int, int);
-        ~Leitura(); // Método Destrutor
-        void setTemp(double); //Métodos Modificadores setXXX
-        void setUmid(double);
-        void setResist(int);
-        void setPiezo(int);
-        void setVent(int);
-        double getTemp(); //Métodos Acessores getXXX
-        double getUmid();
-        int getResist();
-        int getPiezo();
-        int getVent1();
-        int getVent2();
-        void SdCard();
+public:        // Os métodos sao públicos
+    Leitura(); //Construtores (sobrecarregado)
+    Leitura(double, int);
+    Leitura(double, double, int, int, int);
+    ~Leitura();           // Método Destrutor
+    double getTemp(); //Métodos Acessores getXXX
+    double getUmid();
+    int getResist();
+    int getPiezo();
+    int getVent1();
+    int getVent2();
+    void SdCard();
 };
 #endif
