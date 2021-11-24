@@ -1,12 +1,14 @@
 #include <Nextion.h>   // Biblioteca lcd
-#include <Interface.h> // Biblioteca dos macro da interface
-#include <Leitura.h>   // Biblioteca de leitura
+#include "Interface.h" // Biblioteca dos macro da interface
+#include "Leitura.h"   // Biblioteca de leitura
 #include "time_rtc.h"
 #include <iostream>
 
 using namespace std;
 char buffer[25];
 int hora, minuto, dia, mes, ano;
+
+Hora Hora;
 
 // === Declaração de Objetos ===
 Nexsettemp h0 = Nexsettemp(0, 5, "h0"); // Setup das funções do LCD
@@ -28,7 +30,7 @@ NexText v5 = NexText(0, 9, "t9");
 Interface::Interface()
 {
 }
-void Interface::NexRTC()
+void Interface::NexRtcDefinir()
 {
     memset(buffer, 0, sizeof(buffer));
     v1.getText(buffer, sizeof(buffer));
@@ -53,10 +55,10 @@ void Interface::NexRTC()
     Hora.Definir(ano, mes, dia, hora, minuto);
 }
 
-void Interface::NexRTCPrint()
+void Interface::NexRtcPrint()
 {
     String HoraEnvio = Hora.Atual();
     char conversao_S_C[20];
     HoraEnvio.toCharArray(conversao_S_C, 20);
-    v6.setText(conversao_S_C);
+   // v6.setText(conversao_S_C);
 }
