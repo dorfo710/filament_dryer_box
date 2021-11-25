@@ -14,7 +14,7 @@ private: // As variáveis membro são privadas (encapsulamento)
 public:        // Os métodos sao públicos
     Leitura(); //Construtores (sobrecarregado)
     Leitura(double, int);
-    Leitura(double, double, int, int, int, int);
+    Leitura(double, double, int, int, int);
     ~Leitura();           // Método Destrutor
     double getTemp(); //Métodos Acessores getXXX
     double getUmid();
@@ -22,6 +22,6 @@ public:        // Os métodos sao públicos
     int getPiezo();
     int getVent1();
     int getVent2();
-    void SdCard();
+    void SdCard(String);
 };
 #endif
