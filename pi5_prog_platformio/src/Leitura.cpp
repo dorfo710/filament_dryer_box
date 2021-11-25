@@ -53,8 +53,7 @@ Leitura::Leitura(double T, int R)
     Vent = 0;
     cout << "Construindo(2) um objeto da classe Circle!" << endl;
 }
-//Construtor Sobrecarregado - Recebe o raio do circulo, assim como as
-//coordenadas X e Y do Centro Respectivamente
+//TEM Q VER, NAO SEI SE VAI RECEBER, ACHO Q SÓ ENVIAR - ??
 Leitura::Leitura(double T, double U, int R, int P, int V)
 {
     Temp = T;
@@ -62,6 +61,7 @@ Leitura::Leitura(double T, double U, int R, int P, int V)
     Resist = R;
     Piezo = P;
     Vent = V;
+    Vent2 = V2;
     cout << "Construindo(3) um objeto da classe Circle!" << endl;
 }
 //Destrutor
@@ -109,7 +109,7 @@ int Leitura::getVent1()
 int Leitura::getVent2()
 { //Recupera o valor da ventoinha 2
     Vent2 = digitalRead(Vent2_port);
-    return Vent;
+    return Vent2;
 }
 void Leitura::SdCard(String Hora)
 {
