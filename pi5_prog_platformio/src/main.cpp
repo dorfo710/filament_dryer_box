@@ -34,6 +34,12 @@ NexTouch *nex_listen_list[] =
 DHT dht1(DHTPIN, DHTTYPE); //PASSA OS PARÂMETROS PARA A FUNÇÃO
 DHT dht2(DHTPIN2, DHTTYPE);
 
+double Temperatura;
+double Umidade;
+int Resistor; 
+int Piezo; 
+int Vento; 
+int Vento2; 
 
 void setup()
 {
@@ -59,4 +65,18 @@ void loop()
 void b0PopCallback(void *ptr)  
 {
  Interface.NexRtcDefinir();
+}
+
+//TESTE LEITURA
+void leitura(){
+  Leitura T, U, R, P, V, V2, LSD;
+
+  Temperatura = T.getTemp();
+  Umidade = U.getUmid();
+  Resistor = R.getResist();
+  Piezo = P.getPiezo();
+  Vento = V.getVent1();
+  Vento2 =  V2.getVent2();
+  LSD.SdCard();
+
 }
