@@ -16,7 +16,13 @@ Hora Hora;
 NexButton b0 = NexButton(0, 26, "b14");
 NexButton b1 = NexButton(0, 28, "b15");
 
-int HORA, MINUTO, DIA, MES, ANO;
+double Temperatura;
+double Umidade;
+int Resistor; 
+int Piezo; 
+int Vento; 
+int Vento2; 
+
 void setup()
 {
   nexInit();
@@ -49,4 +55,16 @@ void b0PopCallback(void *ptr)
 void b1PopCallback(void *ptr)
 {
   Interface.NexRtcPrint(Hora.Atual());
+}
+
+-void leitura(){
+  Leitura T, U, R, P, V, V2, LSD;
+
+  Temperatura = T.getTemp();
+  Umidade = U.getUmid();
+  Resistor = R.getResist();
+  Piezo = P.getPiezo();
+  Vento = V.getVent1();
+  Vento2 =  V2.getVent2();
+  LSD.SdCard();
 }
