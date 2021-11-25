@@ -27,6 +27,7 @@ void setup()
 {
   nexInit();
   Wire.begin(33, 32);
+  pinMode(14, INPUT_PULLUP);
   b0.attachPop(b0PopCallback, &b0);
   b1.attachPop(b1PopCallback, &b1);
 }
@@ -55,6 +56,7 @@ void b0PopCallback(void *ptr)
 void b1PopCallback(void *ptr)
 {
   Interface.NexRtcPrint(Hora.Atual());
+  //Interface.NexRtcPrint(String(Leitura.getUmid())+" "+ String(Leitura.getTemp()));
 }
 
 -void leitura(){
