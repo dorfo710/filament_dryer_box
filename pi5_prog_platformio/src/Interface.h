@@ -8,8 +8,13 @@ class Interface
 
 private:
 public:
-	Interface(); //Construtores (sobrecarregado)
-	void NexRtcDefinir();
-	void NexRtcPrint();
+  int HORA, MINUTO, DIA, MES, ANO;
+  Interface();
+  int NexRtcDefinirMinuto();
+  int NexRtcDefinirHora();
+  int NexRtcDefinirDia();
+  int NexRtcDefinirMes();
+  int NexRtcDefinirAno();
+  void NexRtcPrint(String);
 };
 #endif
