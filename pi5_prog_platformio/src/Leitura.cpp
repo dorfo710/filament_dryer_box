@@ -8,7 +8,6 @@
 
 #include "SdFat.h"
 #include <Wire.h>
-#include "RTClib.h"
 #include <DHT.h>
 #include <Nextion.h>
 
@@ -29,7 +28,6 @@ DHT dht2(DHTPIN2, DHTTYPE);
 
 SdFat sdCard;
 SdFile meuArquivo;
-RTC_DS3231 rtc;
 const int chipSelect = 5;
 
 
@@ -45,7 +43,6 @@ Leitura::Leitura()
     Vent2 = 0;
     cout << "Construindo(1) um objeto da classe Leitura!" << endl;
 }
-/*
 //Construtor Sobrecarregado - Recebe o raio do circulo
 Leitura::Leitura(double T, int R)
 {
@@ -56,19 +53,16 @@ Leitura::Leitura(double T, int R)
     Vent = 0;
     cout << "Construindo(2) um objeto da classe Circle!" << endl;
 }
-*/
-
-//Construtor Sobrecarregado - Recebe todas as variáveis
-//TEM Q VER, NAO SEI SE VAI RECEBER, ACHO Q SÓ ENVIAR - ??
-Leitura::Leitura(double T, double U, int R, int P, int V, int V2)
+//Construtor Sobrecarregado - Recebe o raio do circulo, assim como as
+//coordenadas X e Y do Centro Respectivamente
+Leitura::Leitura(double T, double U, int R, int P, int V)
 {
     Temp = T;
     Umid = U;
     Resist = R;
     Piezo = P;
     Vent = V;
-    Vent2 = V2;
-    cout << "Construindo(3) um objeto da classe Leitura!" << endl;
+    cout << "Construindo(3) um objeto da classe Circle!" << endl;
 }
 //Destrutor
 Leitura::~Leitura()
@@ -78,7 +72,6 @@ Leitura::~Leitura()
     Resist = 0;
     Piezo = 0;
     Vent = 0;
-    Vent2 = 0;
     //Imprime o texto indicado que o objeto está sendo destruido
     cout << "Destruindo o objeto da classe Ci l rc e!" << endl;
 }
@@ -116,9 +109,9 @@ int Leitura::getVent1()
 int Leitura::getVent2()
 { //Recupera o valor da ventoinha 2
     Vent2 = digitalRead(Vent2_port);
-    return Vent2;
+    return Vent;
 }
-void Leitura::SdCard()
+void Leitura::SdCard(String Hora)
 {
     if (!sdCard.begin(chipSelect, SPI_HALF_SPEED))
         sdCard.initErrorHalt();
@@ -129,8 +122,7 @@ void Leitura::SdCard()
     }
 
     // Grava Cartão
-    DateTime now = rtc.now();
-    String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second()) + ";" + String(Umid) + ";" + String(Temp) + ";";
+    String Dados = String(Hora + ";" + String(Umid) + ";" + String(Temp) + ";");
     meuArquivo.println(Dados);
 
     //Encerra Cartão
