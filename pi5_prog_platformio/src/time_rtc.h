@@ -8,8 +8,8 @@ class Hora
 
 private:
 public:
-	Hora();
-	String Atual();
-	void Definir(int, int, int, int, int);
+  Hora();
+  String Atual();
+  void Ajustar(int, int, int, int, int);
 };
 #endif
