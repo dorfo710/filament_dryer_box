@@ -4,7 +4,7 @@
 
 //Funções
 #include "time_rtc.h"
-#include "controler.h"
+#include "Controller.h"
 #include "Leitura.h"
 #include "Interface.h"
 
