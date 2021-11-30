@@ -24,7 +24,7 @@ public:
     int humidity_PWM_CHANNEL;
     int humidity_PWM_RESOLUTION;
 
-    Controler(){
+    Controler(int Temp_PWM_FREQUENCY, int Temp_PWM_CHANNEL, int Temp_PWM_RESOLUTION, int humidity_PWM_FREQUENCY, int humidity_PWM_CHANNEL, int humidity_PWM_RESOLUTION){
     Desired_temperature = 0;
     Desired_humidity = 0;
 
@@ -35,13 +35,13 @@ public:
     temp_control_state = 0;
     humidity_control_state = 0;
 
-    Temp_PWM_FREQUENCY = 0;
-    Temp_PWM_CHANNEL = 0;
-    Temp_PWM_RESOLUTION = 0;
+    this->Temp_PWM_FREQUENCY = Temp_PWM_FREQUENCY;
+    this->Temp_PWM_CHANNEL = Temp_PWM_CHANNEL;
+    this->Temp_PWM_RESOLUTION = Temp_PWM_RESOLUTION;
 
-    humidity_PWM_FREQUENCY = 0;
-    humidity_PWM_CHANNEL = 0;
-    humidity_PWM_RESOLUTION = 0;
+    this->humidity_PWM_FREQUENCY = humidity_PWM_FREQUENCY;
+    this->humidity_PWM_CHANNEL = humidity_PWM_CHANNEL;
+    this->humidity_PWM_RESOLUTION = humidity_PWM_RESOLUTION;
     }
 
     void Set_temp_pwm_config(int GPIO_pin, int Frequency, int Channel, int Resolution)
