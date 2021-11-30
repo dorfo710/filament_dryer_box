@@ -4,7 +4,7 @@
 
 //Funções
 #include "time_rtc.h"
-//#include "controler.cpp"
+#include "controler.h"
 #include "Leitura.h"
 #include "Interface.h"
 
@@ -59,14 +59,20 @@ void b1PopCallback(void *ptr)
   //Interface.NexRtcPrint(String(Leitura.getUmid())+" "+ String(Leitura.getTemp()));
 }
 
--void leitura(){
-  Leitura T, U, R, P, V, V2, LSD;
 
-  Temperatura = T.getTemp();
-  Umidade = U.getUmid();
-  Resistor = R.getResist();
-  Piezo = P.getPiezo();
-  Vento = V.getVent1();
-  Vento2 =  V2.getVent2();
-  LSD.SdCard();
+
+// inicialização das classes
+  // Leitura
+  -void leitura(){
+    Leitura T, U, R, P, V, V2, LSD;
+  
+    Temperatura = T.getTemp();
+    Umidade = U.getUmid();
+    Resistor = R.getResist();
+    Piezo = P.getPiezo();
+    Vento = V.getVent1();
+    Vento2 =  V2.getVent2();
+    LSD.SdCard();
+
+
 }
