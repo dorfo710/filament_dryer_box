@@ -68,9 +68,13 @@ int Interface::NexRtcDefinirMinuto() {
 }
 
 
-void Interface::NexRtcPrint(String HoraEnvio)
+void Interface::NexRtcPrint(String Valor, String Local)
 {
-  char conversao_S_C[20];
-  HoraEnvio.toCharArray(conversao_S_C, 20);
-  v6.setText(conversao_S_C);   // Envia para caixa de texto  na pagina
+  char conversao_S_C[30];
+  Valor.toCharArray(conversao_S_C, 30);
+
+  if(Local=="Hora"){
+    v6.setText(conversao_S_C);   
+  }
+  
 }
