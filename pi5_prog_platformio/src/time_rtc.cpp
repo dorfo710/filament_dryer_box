@@ -22,3 +22,11 @@ String Hora::Atual()
     String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second());
     return Dados;
 }
+
+bool Hora::Timer()
+{
+    if (now.second() == 0 || now.second() == 20 || now.second() == 40 || now.second() == 60)
+    {
+        return true;
+    }
+}
