@@ -1,6 +1,8 @@
 #ifndef _Controller_H_
 #define _Controller_H_
 
+#include <Arduino.h>
+
 class Controller{
 public:
     float Desired_temperature, Desired_humidity;
