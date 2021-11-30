@@ -15,6 +15,6 @@ public:
   int NexRtcDefinirDia();
   int NexRtcDefinirMes();
   int NexRtcDefinirAno();
-  void NexRtcPrint(String);
+  void NexRtcPrint(String, String);
 };
 #endif
