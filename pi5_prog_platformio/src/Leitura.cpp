@@ -2,9 +2,7 @@
 
 #include <iostream>
 #include "Leitura.h"
-#include "main.cpp"
 #include "time_rtc.h"
-
 
 #include "SdFat.h"
 #include <Wire.h>
@@ -42,16 +40,6 @@ Leitura::Leitura()
     Vent = 0;
     Vent2 = 0;
     cout << "Construindo(1) um objeto da classe Leitura!" << endl;
-}
-//Construtor Sobrecarregado - Recebe o raio do circulo
-Leitura::Leitura(double T, int R)
-{
-    Temp = T;
-    Umid = 0;
-    Resist = R;
-    Piezo = 0;
-    Vent = 0;
-    cout << "Construindo(2) um objeto da classe Circle!" << endl;
 }
 //TEM Q VER, NAO SEI SE VAI RECEBER, ACHO Q SÓ ENVIAR - ??
 Leitura::Leitura(double T, double U, int R, int P, int V)
