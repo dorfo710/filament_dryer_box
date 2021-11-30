@@ -1,8 +1,9 @@
 
-// #include <iostream>
-// #include <Arduino.h>
+#include <iostream>
+#include <Arduino.h>
+
 using namespace std;
-class Controler {
+class Controller {
 
 public:
 
@@ -24,7 +25,7 @@ public:
     int humidity_PWM_CHANNEL;
     int humidity_PWM_RESOLUTION;
 
-    Controler(int Temp_PWM_FREQUENCY, int Temp_PWM_CHANNEL, int Temp_PWM_RESOLUTION, int humidity_PWM_FREQUENCY, int humidity_PWM_CHANNEL, int humidity_PWM_RESOLUTION){
+    Controller(int Temp_PWM_FREQUENCY, int Temp_PWM_CHANNEL, int Temp_PWM_RESOLUTION, int humidity_PWM_FREQUENCY, int humidity_PWM_CHANNEL, int humidity_PWM_RESOLUTION){
     Desired_temperature = 0;
     Desired_humidity = 0;
 
@@ -75,7 +76,7 @@ public:
         if (temp_control_state==0) // returns if the control temp state is set to 0
         {
         printf("Temperature control state turned OFF");
-        ledcWrite(temp_PWM_CHANNEL, 0); // sets the dutycicle to 0
+        ledcWrite(Temp_PWM_CHANNEL, 0); // sets the dutycicle to 0
         return;
         }
         else
