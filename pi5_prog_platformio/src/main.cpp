@@ -16,6 +16,7 @@ Hora Hora;
 NexButton b0 = NexButton(0, 26, "b14");
 NexButton b1 = NexButton(0, 28, "b15");
 
+// Globais
 double Temperatura;
 double Umidade;
 int Resistor; 
@@ -23,8 +24,7 @@ int Piezo;
 int Vento; 
 int Vento2; 
 
-void setup()
-{
+void setup(){
   nexInit();
   Wire.begin(33, 32);
   pinMode(14, INPUT_PULLUP);
@@ -32,18 +32,15 @@ void setup()
   b1.attachPop(b1PopCallback, &b1);
 }
 
-NexTouch *nex_listen_list[] =
-{
+NexTouch *nex_listen_list[] ={
   &b0,
   &b1,
   NULL  // String terminated
 };
 
-
 void loop()
 {
   nexLoop(nex_listen_list);
-
 }
 
 void b0PopCallback(void *ptr)
@@ -60,19 +57,31 @@ void b1PopCallback(void *ptr)
 }
 
 
+void leitura(){
+  Leitura T, U, R, P, V, V2, LSD;
+  Temperatura = T.getTemp();
+  Umidade = U.getUmid();
+  Resistor = R.getResist();
+  Piezo = P.getPiezo();
+  Vento = V.getVent1();
+  Vento2 =  V2.getVent2();
+  LSD.SdCard();
+}
 
-// inicialização das classes
-  // Leitura
-  -void leitura(){
-    Leitura T, U, R, P, V, V2, LSD;
-  
-    Temperatura = T.getTemp();
-    Umidade = U.getUmid();
-    Resistor = R.getResist();
-    Piezo = P.getPiezo();
-    Vento = V.getVent1();
-    Vento2 =  V2.getVent2();
-    LSD.SdCard();
 
+
+
+// setup -> inicializa tudo
+// loop {
+// leitura()
+// while !=rtc(5) <
+//   Interface() <
+//   controller() <
+// }
+
+
+int main
+{
+leitura()
 
 }
