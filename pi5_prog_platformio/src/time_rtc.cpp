@@ -26,7 +26,7 @@ String Hora::Atual()
 bool Hora::Timer()
 {
     DateTime now = rtc.now();
-    if (now.second() == 0 || now.second() == 20 || now.second() == 40 || now.second() == 60)
+    if (now.second() == 0 || now.second() == 20 || now.second() == 40)
     {
         return true;
     }
