@@ -11,5 +11,6 @@ public:
   Hora();
   String Atual();
   void Ajustar(int, int, int, int, int);
+  bool Timer();
 };
 #endif
