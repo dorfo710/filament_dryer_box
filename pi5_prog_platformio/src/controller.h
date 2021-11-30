@@ -8,9 +8,7 @@ public:
     float Desired_temperature, Desired_humidity;
     int pin_state_temp, pin_state_humitidy, pin_state_fans;
     bool temp_control_state, humidity_control_state;
-
     int Temp_PWM_FREQUENCY, Temp_PWM_CHANNEL, Temp_PWM_RESOLUTION;
-
     int humidity_PWM_FREQUENCY, humidity_PWM_CHANNEL, humidity_PWM_RESOLUTION;
 
 public:
