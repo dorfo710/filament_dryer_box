@@ -1,6 +1,6 @@
 
 // #include <iostream>
-#include <Arduino.h>
+// #include <Arduino.h>
 using namespace std;
 class Controler {
 
@@ -23,6 +23,26 @@ public:
     int humidity_PWM_FREQUENCY;
     int humidity_PWM_CHANNEL;
     int humidity_PWM_RESOLUTION;
+
+    Controler(){
+    Desired_temperature = 0;
+    Desired_humidity = 0;
+
+    pin_state_temp = 0;
+    pin_state_humitidy = 0;
+    pin_state_fans = 0;
+
+    temp_control_state = 0;
+    humidity_control_state = 0;
+
+    Temp_PWM_FREQUENCY = 0;
+    Temp_PWM_CHANNEL = 0;
+    Temp_PWM_RESOLUTION = 0;
+
+    humidity_PWM_FREQUENCY = 0;
+    humidity_PWM_CHANNEL = 0;
+    humidity_PWM_RESOLUTION = 0;
+    }
 
     void Set_temp_pwm_config(int GPIO_pin, int Frequency, int Channel, int Resolution)
     {
@@ -48,16 +68,6 @@ public:
     void Set_desired_humidity(float hm)
     {
         Desired_humidity = hm;
-    }
-
-    void Get_curr_temperature() // calls the respective monitor funtioning to return the current state of the temperature in the sistem
-    {
-
-    }
-
-    void Get_curr_humidity() // calls the respective monitor funtioning to return the current state of the humidity in the sistem
-    {
-        
     }
 
     void Control_temp(float curr_temp) // controls the temperature of the sistem
@@ -98,4 +108,3 @@ public:
     }
 
 };
-// ******************************************************************************************************* DAQUI PARA BAIXO É CODIGO EM CONSTRUÇÃO :) *****************************************************************************************
