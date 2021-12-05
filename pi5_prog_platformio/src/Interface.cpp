@@ -80,5 +80,25 @@ void Interface::NexRtcPrint(String Valor, String Local)
 }
 void Interface::Nexsettemp()
 {
-  
+
+}
+void Interface::Nextempautal()
+{
+
+}
+void Interface::NexUmidatual()
+{
+
+}
+void Interface::Nex30umid()
+{
+
+}
+void Interface::Nex50umid()
+{
+
+}
+void Interface::Nex70umid()
+{
+
 }
