@@ -78,3 +78,7 @@ void Interface::NexRtcPrint(String Valor, String Local)
   }
   
 }
+void Interface::Nexsettemp()
+{
+  
+}
