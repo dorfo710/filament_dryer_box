@@ -82,8 +82,8 @@ void leitura()
 // }
 
 Controller();
-Controller.Set_hum_pwm_config();
-Controller.Set_temp_pwm_config();
+Controller.Set_hum_pwm_config();    // int GPIO_pin, int Frequency, int Channel, int Resolution
+Controller.Set_temp_pwm_config();   // int GPIO_pin, int Frequency, int Channel, int Resolution
 
 int main
 {
