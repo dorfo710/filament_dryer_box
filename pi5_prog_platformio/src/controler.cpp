@@ -8,11 +8,19 @@ class Controller {
 
 public:
 
-    float Desired_temperature;
-    float Desired_humidity;
+    double Desired_temperature;
+    double Desired_humidity;
+
+    double real_temperature;
+    double real_humidity;
+    double pin_value_humidity;
+    double pin_value_temperature;
+
+    double Kp_t=2, Ki_t=5, Kd_t=1;
+    double Kp_h=2, Ki_h=5, Kd_h=1;
 
     int pin_state_temp;
-    int pin_state_humitidy;
+    int pin_state_humidity;
     int pin_state_fans;
 
     bool temp_control_state;
@@ -26,12 +34,13 @@ public:
     int humidity_PWM_CHANNEL;
     int humidity_PWM_RESOLUTION;
 
-    Controller(int Temp_PWM_FREQUENCY, int Temp_PWM_CHANNEL, int Temp_PWM_RESOLUTION, int humidity_PWM_FREQUENCY, int humidity_PWM_CHANNEL, int humidity_PWM_RESOLUTION){
+    Controller(int Temp_PWM_FREQUENCY, int Temp_PWM_CHANNEL, int Temp_PWM_RESOLUTION, int humidity_PWM_FREQUENCY, int humidity_PWM_CHANNEL, int humidity_PWM_RESOLUTION)
+    {
     Desired_temperature = 0;
     Desired_humidity = 0;
 
     pin_state_temp = 0;
-    pin_state_humitidy = 0;
+    pin_state_humidity = 0;
     pin_state_fans = 0;
 
     temp_control_state = 0;
@@ -108,4 +117,26 @@ public:
             }
         }
     }
+
+    void PID_CONTROLL(double real_temperature, double real_humidity)
+    {
+        PID myPID_humidity(&real_humidity, &pin_value_humidity, &Desired_humidity, Kp_h, Ki_h, Kd_h, DIRECT);
+        PID myPID_temperature(&real_temperature, &pin_value_temperature, &Desired_temperature, Kp_t, Ki_t, Kd_t, DIRECT);
+        //real_temperature = analogRead(PIN_INPUT); // atualisar real temperature
+        Desired_temperature = 100;  // set the target (dummy)
+        Desired_humidity = 30;      // set the target (dummy)
+
+        //turn the PID on
+        myPID_temperature.SetMode(AUTOMATIC);
+        myPID_humidity.SetMode(AUTOMATIC);
+
+        myPID_temperature.Compute();
+        ledcWrite(Temp_PWM_FREQUENCY, pin_value_temperature);
+
+        myPID_humidity.Compute();
+        ledcWrite(humidity_PWM_FREQUENCY, pin_value_humidity);
+    }
 };
+
+
+        // PID myPID_temperature(&real_temperature, &pin_value_temperature, &Desired_temperature, Kp_t, Ki_t, Kd_t, DIRECT);
