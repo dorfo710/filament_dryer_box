@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <Arduino.h>
+#include <PID>
 
 using namespace std;
 class Controller {
