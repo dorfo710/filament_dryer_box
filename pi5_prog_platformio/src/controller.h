@@ -5,7 +5,7 @@
 
 class Controller{
 public:
-    float Desired_temperature, Desired_humidity;
+    double Desired_temperature, Desired_humidity, pin_value_humidity, pin_value_temperature;
     int pin_state_temp, pin_state_humitidy, pin_state_fans;
     bool temp_control_state, humidity_control_state;
     int Temp_PWM_FREQUENCY, Temp_PWM_CHANNEL, Temp_PWM_RESOLUTION;
