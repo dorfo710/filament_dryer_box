@@ -91,8 +91,9 @@ int main
 
   Controller.Set_desired_temperature(); // this function recives the Temperature value from the interface and stores inside the class controller
   Controller.Set_desired_humidity();    // this function recives the Humidity value from the interface and stores inside the class controller
-  Controller.Control_humidity(Umidade); // this function controlls the pwm signal based on the read Humidity
-  Controller.Control_temp(Temperatura); // this function controlls the pwm signal based on the read Temperature
+  //Controller.Control_humidity(Umidade); // this function controlls the pwm signal based on the read Humidity
+  //Controller.Control_temp(Temperatura); // this function controlls the pwm signal based on the read Temperature
+  controller.PID_CONTROLL(Temperatura, Umidade);
 
 
 }
