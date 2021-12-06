@@ -19,5 +19,6 @@ public:
     void Set_desired_humidity(float);
     void Control_temp(float);
     void Control_humidity(float);
+    void PID_CONTROLL(double, double);
 };
 #endif
