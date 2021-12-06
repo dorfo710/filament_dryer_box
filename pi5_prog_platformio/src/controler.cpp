@@ -11,8 +11,8 @@ public:
     double Desired_temperature;
     double Desired_humidity;
 
-    double real_temperature;
-    double real_humidity;
+    //double real_temperature;
+    //double real_humidity;
     double pin_value_humidity;
     double pin_value_temperature;
 
@@ -64,11 +64,13 @@ public:
     ledcSetup(Channel, Frequency, Resolution);
     }
 
-    void Set_hum_pwm_config(int Frequency, int Channel, int Resolution)
+    void Set_hum_pwm_config(int GPIO_pin, int Frequency, int Channel, int Resolution)
     {
     Temp_PWM_FREQUENCY = Frequency;
     Temp_PWM_CHANNEL = Channel;
     Temp_PWM_RESOLUTION = Resolution;
+    ledcAttachPin(GPIO_pin, Channel);
+    ledcSetup(Channel, Frequency, Resolution);
     }
 
     void Set_desired_temperature(float DT)
