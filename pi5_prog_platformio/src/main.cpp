@@ -6,11 +6,11 @@
 #include "time_rtc.h"
 #include "Controller.h"
 #include "Leitura.h"
-#include "Interface.h"
+//#include "Interface.h"
 
 uint32_t ds_var;
-Interface Interface;
-Hora Hora;
+//Interface Interface;
+//Hora Hora;
 
 //Nextion
 NexButton b0 = NexButton(0, 26, "b14");
