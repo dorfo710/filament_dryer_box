@@ -31,3 +31,10 @@ bool Hora::Timer()
         return true;
     }
 }
+bool Hora::TimerVerifica(){
+    DateTime now = rtc.now();
+    if (now.second() == 1 || now.second() == 21 || now.second() == 41)
+    {
+        return true;
+    }
+}
