@@ -16,13 +16,13 @@ public:
   int NexRtcDefinirDia();
   int NexRtcDefinirMes();
   int NexRtcDefinirAno();
-  void NexRtcPrint(String, String);
-  int NexUmidatual();
-  int Nextempautal();
-  int Nexsettemp();
-  int Nex30umid();
-  int Nex50umid();
-  int Nex70umid();
+  void NexPrint(String, String);
+  void NexUmidatual();
+  void Nextempautal();
+  void Nexsettemp();
+  void Nex30umid();
+  void Nex50umid();
+  void Nex70umid();
   // casa
 };
 #endif
