@@ -9,8 +9,10 @@
 #include "Interface.h"
 
 uint32_t ds_var;
-Interface I;
-Hora H;
+//Objetos
+Interface I; // I objeto da classe Interface
+Hora H;      // H objeto da classe Hora
+Leitura L;   // L objeto da classe Leitura
 
 //Nextion
 NexButton b0 = NexButton(0, 26, "b14");
@@ -24,6 +26,19 @@ int Piezo;
 int Vento;
 int Vento2;
 bool auxiliar = false;
+
+void b0PopCallback(void *ptr)
+{
+  H.Ajustar(I.NexRtcDefinirAno(), I.NexRtcDefinirMes(), I.NexRtcDefinirDia(),
+               I.NexRtcDefinirHora(), I.NexRtcDefinirMinuto());
+  I.NexPrint(H.Atual(), "Hora");
+}
+
+void b1PopCallback(void *ptr)
+{
+  I.NexPrint(H.Atual(), "Hora");
+  //Interface.NexRtcPrint(String(Leitura.getUmid())+" "+ String(Leitura.getTemp()));
+}
 
 void setup()
 {
@@ -48,19 +63,6 @@ void loop()
     auxiliar = false;
   }
   auxiliar = H.TimerVerifica();
-}
-
-void b0PopCallback(void *ptr)
-{
-  H.Ajustar(I.NexRtcDefinirAno(), I.NexRtcDefinirMes(), I.NexRtcDefinirDia(),
-               I.NexRtcDefinirHora(), I.NexRtcDefinirMinuto());
-  I.NexPrint(H.Atual(), "Hora");
-}
-
-void b1PopCallback(void *ptr)
-{
-  I.NexPrint(H.Atual(), "Hora");
-  //Interface.NexRtcPrint(String(Leitura.getUmid())+" "+ String(Leitura.getTemp()));
 }
 
 void leitura()
