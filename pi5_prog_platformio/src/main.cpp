@@ -23,6 +23,7 @@ int Resistor;
 int Piezo;
 int Vento;
 int Vento2;
+bool auxiliar = false;
 
 void setup()
 {
@@ -42,10 +43,12 @@ NexTouch *nex_listen_list[] = {
 void loop()
 {
   nexLoop(nex_listen_list);
-  if (Hora.Timer() == true)
+  if (Hora.Timer() == true && auxiliar == true)
   {
     leitura();
+    auxiliar = false;
   }
+  auxiliar = Hora.TimerVerifica();
 }
 
 void b0PopCallback(void *ptr)
