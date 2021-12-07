@@ -12,5 +12,6 @@ public:
   String Atual();
   void Ajustar(int, int, int, int, int);
   bool Timer();
+  bool TimerVerifica();
 };
 #endif
