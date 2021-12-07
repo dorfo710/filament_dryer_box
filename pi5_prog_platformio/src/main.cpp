@@ -6,11 +6,11 @@
 #include "time_rtc.h"
 #include "Controller.h"
 #include "Leitura.h"
-//#include "Interface.h"
+#include "Interface.h"
 
 uint32_t ds_var;
-//Interface Interface;
-//Hora Hora;
+Interface Interface();
+Hora Hora();
 
 //Nextion
 NexButton b0 = NexButton(0, 26, "b14");
@@ -45,7 +45,6 @@ void loop()
   nexLoop(nex_listen_list);
   if (Hora.Timer() == true && auxiliar == true)
   {
-    leitura();
     auxiliar = false;
   }
   auxiliar = Hora.TimerVerifica();
@@ -55,12 +54,12 @@ void b0PopCallback(void *ptr)
 {
   Hora.Ajustar(Interface.NexRtcDefinirAno(), Interface.NexRtcDefinirMes(), Interface.NexRtcDefinirDia(),
                Interface.NexRtcDefinirHora(), Interface.NexRtcDefinirMinuto());
-  Interface.NexRtcPrint(Hora.Atual());
+  Interface.NexPrint(Hora.Atual(), "Hora");
 }
 
 void b1PopCallback(void *ptr)
 {
-  Interface.NexRtcPrint(Hora.Atual());
+  Interface.NexPrint(Hora.Atual(), "Hora");
   //Interface.NexRtcPrint(String(Leitura.getUmid())+" "+ String(Leitura.getTemp()));
 }
 
@@ -73,9 +72,8 @@ void leitura()
   Piezo = P.getPiezo();
   Vento = V.getVent1();
   Vento2 = V2.getVent2();
-  LSD.SdCard();
 }
-
+/*
 // setup -> inicializa tudo
 // loop {
 // leitura()
@@ -99,4 +97,4 @@ int main
   controller.PID_CONTROLL(Temperatura, Umidade);
 
 
-}
+}*/
