@@ -9,8 +9,8 @@
 #include "Interface.h"
 
 uint32_t ds_var;
-Interface Interface();
-Hora Hora();
+Interface I;
+Hora H;
 
 //Nextion
 NexButton b0 = NexButton(0, 26, "b14");
@@ -43,23 +43,23 @@ NexTouch *nex_listen_list[] = {
 void loop()
 {
   nexLoop(nex_listen_list);
-  if (Hora.Timer() == true && auxiliar == true)
+  if (H.Timer() == true && auxiliar == true)
   {
     auxiliar = false;
   }
-  auxiliar = Hora.TimerVerifica();
+  auxiliar = H.TimerVerifica();
 }
 
 void b0PopCallback(void *ptr)
 {
-  Hora.Ajustar(Interface.NexRtcDefinirAno(), Interface.NexRtcDefinirMes(), Interface.NexRtcDefinirDia(),
-               Interface.NexRtcDefinirHora(), Interface.NexRtcDefinirMinuto());
-  Interface.NexPrint(Hora.Atual(), "Hora");
+  H.Ajustar(I.NexRtcDefinirAno(), I.NexRtcDefinirMes(), I.NexRtcDefinirDia(),
+               I.NexRtcDefinirHora(), I.NexRtcDefinirMinuto());
+  I.NexPrint(H.Atual(), "Hora");
 }
 
 void b1PopCallback(void *ptr)
 {
-  Interface.NexPrint(Hora.Atual(), "Hora");
+  I.NexPrint(H.Atual(), "Hora");
   //Interface.NexRtcPrint(String(Leitura.getUmid())+" "+ String(Leitura.getTemp()));
 }
 
