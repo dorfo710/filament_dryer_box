@@ -38,3 +38,7 @@ bool Hora::TimerVerifica(){
         return true;
     }
 }
+//vcc = 3.3v
+//gnd = gnd
+//sda = d33
+//scl = d32
