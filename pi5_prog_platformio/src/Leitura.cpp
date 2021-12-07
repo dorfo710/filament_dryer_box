@@ -16,7 +16,7 @@ using namespace std;
 #define Vent1_port 26
 #define Vent2_port 27
 
-#define DHTPIN 15     //PINO DIGITAL UTILIZADO PELO DHT22
+#define DHTPIN 13     //PINO DIGITAL UTILIZADO PELO DHT22
 #define DHTPIN2 14
 #define DHTTYPE DHT22 //DEFINE O MODELO DO SENSOR (DHT22 / AM2302)
 
