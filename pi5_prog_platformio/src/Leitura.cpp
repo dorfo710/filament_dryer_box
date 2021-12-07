@@ -41,7 +41,7 @@ Leitura::Leitura()
     Vent2 = 0;
     cout << "Construindo(1) um objeto da classe Leitura!" << endl;
 }
-//TEM Q VER, NAO SEI SE VAI RECEBER, ACHO Q SÓ ENVIAR - ??
+/*//TEM Q VER, NAO SEI SE VAI RECEBER, ACHO Q SÓ ENVIAR - ??
 Leitura::Leitura(double T, double U, int R, int P, int V)
 {
     Temp = T;
@@ -52,6 +52,7 @@ Leitura::Leitura(double T, double U, int R, int P, int V)
     Vent2 = V2;
     cout << "Construindo(3) um objeto da classe Circle!" << endl;
 }
+*/
 //Destrutor
 Leitura::~Leitura()
 {
