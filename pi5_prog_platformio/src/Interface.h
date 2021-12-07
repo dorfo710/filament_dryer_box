@@ -9,6 +9,7 @@ class Interface
 private:
 public:
   int HORA, MINUTO, DIA, MES, ANO;
+  int SETTEMP, TEMP, UMID;
   Interface();
   int NexRtcDefinirMinuto();
   int NexRtcDefinirHora();
@@ -16,5 +17,12 @@ public:
   int NexRtcDefinirMes();
   int NexRtcDefinirAno();
   void NexRtcPrint(String, String);
+  int NexUmidatual();
+  int Nextempautal();
+  int Nexsettemp();
+  int Nex30umid();
+  int Nex50umid();
+  int Nex70umid();
+  // casa
 };
 #endif
