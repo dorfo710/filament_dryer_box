@@ -10,6 +10,11 @@ char buffer[25];
 NexText TempP0 = NexText(0, 2, "t1");
 NexText UmidP0 = NexText(0, 7, "t4");
 NexText MostradorP0 = NexText(0, 18, "t10");
+
+NexCheckbox c0 = NexCheckbox(0, 13, "c0");
+NexCheckbox c1 = NexCheckbox(0, 14, "c1");
+NexCheckbox c2 = NexCheckbox(0, 15, "c2");
+NexSlider h0 = NexSlider(0, 5, "h0");
 //Page1
 NexText MostradorP1 = NexText(1, 4, "t10");
 
@@ -25,6 +30,10 @@ NexText v3 = NexText(0, 7, "t7");
 NexText v4 = NexText(0, 8, "t8");
 NexText v5 = NexText(0, 9, "t9");
 NexText MostradorP3 = NexText(0, 27, "t10");
+
+NexButton b0 = NexButton(0, 26, "b14");
+NexButton b1 = NexButton(0, 28, "b15");
+
 
 Interface::Interface()
 {
