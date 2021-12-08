@@ -15,8 +15,15 @@ Hora H;      // H objeto da classe Hora
 Leitura L;   // L objeto da classe Leitura
 
 //Nextion
+//P0
+NexCheckbox c0 = NexCheckbox(0, 13, "c0");
+NexCheckbox c1 = NexCheckbox(0, 14, "c1");
+NexCheckbox c2 = NexCheckbox(0, 15, "c2");
+NexSlider h0 = NexSlider(0, 5, "h0");
+//P3
 NexButton b0 = NexButton(0, 26, "b14");
 NexButton b1 = NexButton(0, 28, "b15");
+
 
 // Globais
 double Temperatura;
@@ -30,7 +37,7 @@ bool auxiliar = false;
 void b0PopCallback(void *ptr)
 {
   H.Ajustar(I.NexRtcDefinirAno(), I.NexRtcDefinirMes(), I.NexRtcDefinirDia(),
-               I.NexRtcDefinirHora(), I.NexRtcDefinirMinuto());
+            I.NexRtcDefinirHora(), I.NexRtcDefinirMinuto());
   I.NexPrint(H.Atual(), "Hora");
 }
 
@@ -38,6 +45,22 @@ void b1PopCallback(void *ptr)
 {
   I.NexPrint(H.Atual(), "Hora");
   //Interface.NexRtcPrint(String(Leitura.getUmid())+" "+ String(Leitura.getTemp()));
+}
+void h0PopCallback(void *ptr)
+{
+
+}
+void c0PopCallback(void *ptr)
+{
+
+}
+void c1PopCallback(void *ptr)
+{
+
+}
+void c2PopCallback(void *ptr)
+{
+
 }
 
 void setup()
@@ -47,11 +70,19 @@ void setup()
   pinMode(14, INPUT_PULLUP);
   b0.attachPop(b0PopCallback, &b0);
   b1.attachPop(b1PopCallback, &b1);
+  h0.attachPop(h0PopCallback, &h0);
+  c0.attachPop(c0PopCallback, &c0);
+  c1.attachPop(c1PopCallback, &c1);
+  c2.attachPop(c2PopCallback, &c2);
 }
 
 NexTouch *nex_listen_list[] = {
     &b0,
     &b1,
+    &h0,
+    &c0,
+    &c1,
+    &c2,
     NULL // String terminated
 };
 
