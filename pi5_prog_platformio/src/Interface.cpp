@@ -7,8 +7,8 @@ char buffer[25];
 
 // === Declaração de Objetos ===
 //Page0
-NexText TempP0 = NexText(0, 2, "t1");
-NexText UmidP0 = NexText(0, 7, "t4");
+NexText TempP0 = NexText(0, 2, "temp");
+NexText UmidP0 = NexText(0, 7, "umid");
 NexText MostradorP0 = NexText(0, 18, "t10");
 
 NexCheckbox c0 = NexCheckbox(0, 13, "c0");
@@ -19,8 +19,8 @@ NexSlider h0 = NexSlider(0, 5, "h0");
 NexText MostradorP1 = NexText(1, 4, "t10");
 
 //Page2
-NexText TempP2 = NexText(2, 4, "t2");
-NexText UmidP2 = NexText(2, 5, "t3");
+NexText TempP2 = NexText(2, 4, "temp");
+NexText UmidP2 = NexText(2, 5, "umid");
 NexText MostradorP2 = NexText(2, 3, "t10");
 
 //Page3
@@ -89,26 +89,19 @@ void Interface::NexPrint(String Valor, String Local)
   if (Local == "Aviso")
   {
     MostradorP0.setText(conversao_S_C);
-    MostradorP1.setText(conversao_S_C);
-    MostradorP2.setText(conversao_S_C);
-    MostradorP3.setText(conversao_S_C);
   }
   if (Local == "Hora")
   {
     MostradorP0.setText(conversao_S_C);
-    MostradorP1.setText(conversao_S_C);
-    MostradorP2.setText(conversao_S_C);
-    MostradorP3.setText(conversao_S_C);
+    
   }
   if (Local == "Temp")
   {
     TempP0.setText(conversao_S_C);
-    TempP2.setText(conversao_S_C);
   }
   if (Local == "Umid")
   {
     UmidP0.setText(conversao_S_C);
-    UmidP2.setText(conversao_S_C);
   }
 }
 int Interface::NexGetInt(String Item)
