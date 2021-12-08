@@ -17,8 +17,8 @@ public:
   int NexRtcDefinirMes();
   int NexRtcDefinirAno();
   void NexPrint(String, String);
-  int NexGet(String);
-  
+  int NexGetInt(String);
+
   void NexUmidatual();
   void Nextempautal();
   void Nexsettemp();
