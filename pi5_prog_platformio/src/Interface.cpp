@@ -111,23 +111,20 @@ int Interface::NexGetInt(String Item)
   if (Item == "h0")
   {
     h0.getValue(&valor);
-    return valor;
   }
   if (Item == "c0")
   {
     c0.getValue(&valor);
-    return valor;
   }
   if (Item == "c1")
   {
     c1.getValue(&valor);
-    return valor;
   }
   if (Item == "c2")
   {
     c2.getValue(&valor);
-    return valor;
   }
+  return valor;
 }
 
 void Interface::Nexsettemp()
