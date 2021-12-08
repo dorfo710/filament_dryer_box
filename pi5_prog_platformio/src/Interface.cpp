@@ -117,22 +117,22 @@ int Interface::NexGetInt(String Item)
   uint32_t valor = 0;
   if (Item == "h0")
   {
-    h0.getValue(&number);
+    h0.getValue(&valor);
     return valor;
   }
   if (Item == "c0")
   {
-    c0.getValue(&number);
+    c0.getValue(&valor);
     return valor;
   }
   if (Item == "c1")
   {
-    c1.getValue(&number);
+    c1.getValue(&valor);
     return valor;
   }
   if (Item == "c2")
   {
-    c2.getValue(&number);
+    c2.getValue(&valor);
     return valor;
   }
 }
