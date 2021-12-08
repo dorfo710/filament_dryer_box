@@ -48,19 +48,19 @@ void b1PopCallback(void *ptr)
 }
 void h0PopCallback(void *ptr)
 {
-
+    I.NexGetInt("h0");
 }
 void c0PopCallback(void *ptr)
 {
-
+    I.NexGetInt("c0");
 }
 void c1PopCallback(void *ptr)
 {
-
+    I.NexGetInt("c1");
 }
 void c2PopCallback(void *ptr)
 {
-
+    I.NexGetInt("c2");
 }
 
 void setup()
