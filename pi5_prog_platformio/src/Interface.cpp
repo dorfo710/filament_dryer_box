@@ -24,7 +24,7 @@ NexText v2 = NexText(0, 6, "t6");
 NexText v3 = NexText(0, 7, "t7");
 NexText v4 = NexText(0, 8, "t8");
 NexText v5 = NexText(0, 9, "t9");
-NexText MostradorP3 = NexText(0, 27, "t10"); 
+NexText MostradorP3 = NexText(0, 27, "t10");
 
 Interface::Interface()
 {
@@ -101,14 +101,32 @@ void Interface::NexPrint(String Valor, String Local)
     UmidP0.setText(conversao_S_C);
     UmidP2.setText(conversao_S_C);
   }
-
-
-
-
-
 }
+int Interface::NexGetInt(String Item)
+{
 
-
+  uint32_t valor = 0;
+  if (Item == "h0")
+  {
+    h0.getValue(&number);
+    return valor;
+  }
+  if (Item == "c0")
+  {
+    c0.getValue(&number);
+    return valor;
+  }
+  if (Item == "c1")
+  {
+    c1.getValue(&number);
+    return valor;
+  }
+  if (Item == "c2")
+  {
+    c2.getValue(&number);
+    return valor;
+  }
+}
 
 void Interface::Nexsettemp()
 {
