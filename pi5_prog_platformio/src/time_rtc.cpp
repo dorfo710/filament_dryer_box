@@ -19,7 +19,7 @@ void Hora::Ajustar(int ano, int mes, int dia, int hora, int minuto)
 String Hora::Atual()
 {
     DateTime now = rtc.now();
-    String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()));
+    String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute());
     return Dados;
 }
 
@@ -30,6 +30,7 @@ bool Hora::Timer()
     {
         return true;
     }
+    return false;
 }
 bool Hora::TimerVerifica(){
     DateTime now = rtc.now();
@@ -37,6 +38,7 @@ bool Hora::TimerVerifica(){
     {
         return true;
     }
+    return false;
 }
 //vcc = 3.3v
 //gnd = gnd
