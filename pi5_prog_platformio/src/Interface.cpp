@@ -7,10 +7,6 @@ char buffer[25];
 
 // === Declaração de Objetos ===
 //Page0
-NexSlider h0 = NexSlider(0, 5, "h0"); // Setup das funções do LCD
-NexCheckbox c0 = NexCheckbox(0, 13, "c0");
-NexCheckbox c1 = NexCheckbox(0, 14, "c1");
-NexCheckbox c2 = NexCheckbox(0, 15, "c2");
 NexText TempP0 = NexText(0, 2, "t1");
 NexText UmidP0 = NexText(0, 7, "t4");
 NexText MostradorP0 = NexText(0, 18, "t10");
