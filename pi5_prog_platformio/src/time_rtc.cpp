@@ -19,7 +19,7 @@ void Hora::Ajustar(int ano, int mes, int dia, int hora, int minuto)
 String Hora::Atual()
 {
     DateTime now = rtc.now();
-    String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second());
+    String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()));
     return Dados;
 }
 
