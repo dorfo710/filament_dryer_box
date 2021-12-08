@@ -16,13 +16,14 @@ Leitura L;   // L objeto da classe Leitura
 
 //Nextion
 //P0
-NexCheckbox c0 = NexCheckbox(0, 13, "c0");
-NexCheckbox c1 = NexCheckbox(0, 14, "c1");
-NexCheckbox c2 = NexCheckbox(0, 15, "c2");
-NexSlider h0 = NexSlider(0, 5, "h0");
+NexButton P0b0 = NexButton(0, 20, "b1");
+NexButton P0b1 = NexButton(0, 21, "b2");
+NexButton P0b2 = NexButton(0, 22, "b3");
+NexButton P0b3 = NexButton(0, 23, "b4");
+
 //P3
-NexButton b0 = NexButton(0, 26, "b14");
-NexButton b1 = NexButton(0, 28, "b15");
+NexButton b0 = NexButton(3, 26, "b14");
+NexButton b1 = NexButton(3, 28, "b15");
 
 
 // Globais
@@ -46,19 +47,20 @@ void b1PopCallback(void *ptr)
   I.NexPrint(H.Atual(), "Hora");
   //Interface.NexRtcPrint(String(Leitura.getUmid())+" "+ String(Leitura.getTemp()));
 }
-void h0PopCallback(void *ptr)
+
+void P0b0PopCallback(void *ptr)
 {
     I.NexGetInt("h0");
 }
-void c0PopCallback(void *ptr)
+void P0b1PopCallback(void *ptr)
 {
     I.NexGetInt("c0");
 }
-void c1PopCallback(void *ptr)
+void P0b2PopCallback(void *ptr)
 {
     I.NexGetInt("c1");
 }
-void c2PopCallback(void *ptr)
+void P0b3PopCallback(void *ptr)
 {
     I.NexGetInt("c2");
 }
@@ -68,21 +70,22 @@ void setup()
   nexInit();
   Wire.begin(33, 32);
   pinMode(14, INPUT_PULLUP);
+  pinMode(13, INPUT_PULLUP);
   b0.attachPop(b0PopCallback, &b0);
   b1.attachPop(b1PopCallback, &b1);
-  h0.attachPop(h0PopCallback, &h0);
-  c0.attachPop(c0PopCallback, &c0);
-  c1.attachPop(c1PopCallback, &c1);
-  c2.attachPop(c2PopCallback, &c2);
+  P0b0.attachPop(P0b0PopCallback, &P0b0);
+  P0b1.attachPop(P0b1PopCallback, &P0b1);
+  P0b2.attachPop(P0b2PopCallback, &P0b2);
+  P0b3.attachPop(P0b3PopCallback, &P0b3);
 }
 
 NexTouch *nex_listen_list[] = {
     &b0,
     &b1,
-    &h0,
-    &c0,
-    &c1,
-    &c2,
+    &P0b0,
+    &P0b1,
+    &P0b2,
+    &P0b3,
     NULL // String terminated
 };
 
@@ -91,6 +94,13 @@ void loop()
   nexLoop(nex_listen_list);
   if (H.Timer() == true && auxiliar == true)
   {
+    int Temp, Umid;
+    Temp = L.getTemp();
+    Umid = L.getUmid();
+    I.NexPrint(String(Temp), "Temp");
+    I.NexPrint(String(Umid), "Umid");
+    I.NexPrint(String(H.Atual()), "Hora");
+
     auxiliar = false;
   }
   auxiliar = H.TimerVerifica();
