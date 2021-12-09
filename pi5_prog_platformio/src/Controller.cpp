@@ -32,6 +32,9 @@ using namespace std;
     int humidity_PWM_CHANNEL;
     int humidity_PWM_RESOLUTION;
 
+    int Desired_temperature = 100;  // set the target (dummy)
+    int Desired_humidity = 30;      // set the target (dummy)
+
     Controller::Controller()
     {
     Desired_temperature = 0;
@@ -123,8 +126,6 @@ using namespace std;
         PID myPID_humidity(&real_humidity, &pin_value_humidity, &Desired_humidity, Kp_h, Ki_h, Kd_h, DIRECT);
         PID myPID_temperature(&real_temperature, &pin_value_temperature, &Desired_temperature, Kp_t, Ki_t, Kd_t, DIRECT);
         //real_temperature = analogRead(PIN_INPUT); // atualisar real temperature
-        Desired_temperature = 100;  // set the target (dummy)
-        Desired_humidity = 30;      // set the target (dummy)
 
         //turn the PID on
         myPID_temperature.SetMode(AUTOMATIC);
