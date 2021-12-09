@@ -6,6 +6,7 @@
 
 #include "SdFat.h"
 #include <Wire.h>
+#include <Adafruit_Sensor.h>
 #include <DHT.h>
 #include <Nextion.h>
 
