@@ -128,6 +128,9 @@ void loop()
     I.NexPrint(String(H.Atual()), "Hora");
 
     auxiliar = false;
+
+    CTRL.Desired_temperature = I.TEMP;
+    CTRL.Desired_humidity = I.UMID;
     CTRL.PID_CONTROLL(Temperatura, Umidade);
   }
   auxiliar = H.TimerVerifica();
