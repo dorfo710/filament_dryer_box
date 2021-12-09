@@ -3,7 +3,8 @@
 
 #include <Arduino.h>
 
-class Controller{
+class Controller
+{
 public:
     double Desired_temperature, Desired_humidity, pin_value_humidity, pin_value_temperature;
     int pin_state_temp, pin_state_humitidy, pin_state_fans;
@@ -12,9 +13,9 @@ public:
     int humidity_PWM_FREQUENCY, humidity_PWM_CHANNEL, humidity_PWM_RESOLUTION;
 
 public:
-    Controller(double, double, int, int, int, int);
+    Controller();
     void Set_temp_pwm_config(int, int, int, int);
-    void Set_hum_pwm_config(int, int, int);
+    void Set_hum_pwm_config(int, int, int, int);
     void Set_desired_temperature(float);
     void Set_desired_humidity(float);
     void Control_temp(float);
