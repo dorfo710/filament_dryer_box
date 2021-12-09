@@ -31,8 +31,9 @@ NexText v4 = NexText(0, 8, "t8");
 NexText v5 = NexText(0, 9, "t9");
 NexText MostradorP3 = NexText(0, 27, "t10");
 
-NexButton b0 = NexButton(0, 26, "b14");
-NexButton b1 = NexButton(0, 28, "b15");
+// dorfo > comentei porque essas duas variaveis estão definidas no main
+//NexButton b0 = NexButton(0, 26, "b14");
+//NexButton b1 = NexButton(0, 28, "b15");
 
 
 Interface::Interface()
