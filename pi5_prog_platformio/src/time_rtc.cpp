@@ -8,6 +8,7 @@ RTC_DS3231 rtc;
 
 using namespace std;
 
+int cond1vez = 0;
 Hora::Hora()
 {
 }
@@ -25,24 +26,20 @@ String Hora::Atual()
 
 bool Hora::Timer()
 {
-    DateTime now = rtc.now();
-    if (now.second() == 0 || now.second() == 20 || now.second() == 40)
-    {
-        return true;
+  DateTime now = rtc.now();
+  if (now.second() == 0 || now.second() == 20 || now.second() == 40) {
+    if (cond1vez == 1) {
+      cond1vez = 0;
+      return true;
     }
-    else
-        return false;
+  }
+  if (now.second() == 1 || now.second() == 21 || now.second() == 41)
+  {
+    cond1vez = 1;
+    return false;
+  }
 }
-bool Hora::TimerVerifica()
-{
-    DateTime now = rtc.now();
-    if (now.second() == 1 || now.second() == 21 || now.second() == 41)
-    {
-        return true;
-    }
-    else
-        return false;
-}
+
 // vcc = 3.3v
 // gnd = gnd
 // sda = d33
