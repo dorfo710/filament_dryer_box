@@ -99,7 +99,7 @@ int Leitura::getVent2()
     Vent2 = digitalRead(Vent2_port);
     return Vent2;
 }
-void Leitura::SdCard(String Hora)
+void Leitura::SdCard(String Hora, String UmiD, String TemP)
 {
     if (!sdCard.begin(chipSelect, SPI_HALF_SPEED))
         sdCard.initErrorHalt();
@@ -110,7 +110,7 @@ void Leitura::SdCard(String Hora)
     }
 
     // Grava Cartão
-    String Dados = String(Hora + ";" + String(Umid) + ";" + String(Temp) + ";");
+    String Dados = String(Hora + ";" + UmiD + ";" + TemP + ";");
     meuArquivo.println(Dados);
 
     //Encerra Cartão
