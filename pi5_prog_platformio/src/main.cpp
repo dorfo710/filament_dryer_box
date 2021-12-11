@@ -1,32 +1,28 @@
-//Bibliotecas
+// Bibliotecas
 #include <Wire.h>
+#include <EEPROM.h>
 #include "Nextion.h"
-//Funções
+// Funções
 #include "time_rtc.h"
 #include "Controller.h"
 #include "Leitura.h"
 #include "Interface.h"
 
-
 uint32_t ds_var;
-//Objetos
+// Objetos
 Interface I; // I objeto da classe Interface
 Hora H;      // H objeto da classe Hora
 Leitura L;   // L objeto da classe Leitura
 
+// Nextion
+// P0
+NexSlider h0 = NexSlider(0, 4, "h0");
+NexCheckbox c0 = NexCheckbox(0, 12, "c0");
+NexCheckbox c1 = NexCheckbox(0, 13, "c1");
+NexCheckbox c2 = NexCheckbox(0, 14, "c2");
 
-//Nextion
-//P0
-NexButton P0b0 = NexButton(0, 20, "b1");
-NexButton P0b1 = NexButton(0, 21, "b2");
-NexButton P0b2 = NexButton(0, 22, "b3");
-NexButton P0b3 = NexButton(0, 23, "b4");
-
-
-//P3
+// P3
 NexButton b0 = NexButton(3, 26, "b14");
-NexButton b1 = NexButton(3, 28, "b15");
-
 
 // Globais
 double Temperatura;
@@ -36,8 +32,8 @@ int Piezo;
 int Vento;
 int Vento2;
 bool auxiliar = false;
+uint32_t valor = 0;
 Controller CTRL;
-
 
 void b0PopCallback(void *ptr)
 {
@@ -45,37 +41,39 @@ void b0PopCallback(void *ptr)
             I.NexRtcDefinirHora(), I.NexRtcDefinirMinuto());
   I.NexPrint(H.Atual(), "Hora");
 }
-void b1PopCallback(void *ptr)
+
+void h0PopCallback(void *ptr)
 {
-  I.NexPrint(H.Atual(), "Hora");
-  //Interface.NexRtcPrint(String(Leitura.getUmid())+" "+ String(Leitura.getTemp()));
+  h0.getValue(&valor);
+  EEPROM.writeInt(1, valor);
+  EEPROM.commit();
 }
-void P0b0PopCallback(void *ptr)
+void c0PopCallback(void *ptr)
 {
-    I.NexGetInt("h0");
+  c0.getValue(&valor);
+  EEPROM.writeInt(2, valor);
+  EEPROM.commit()
 }
-void P0b1PopCallback(void *ptr)
+void c1PopCallback(void *ptr)
 {
-    I.NexGetInt("c0");
+  c1.getValue(&valor);
+  EEPROM.writeInt(3, valor);
+  EEPROM.commit()
 }
-void P0b2PopCallback(void *ptr)
+void c2PopCallback(void *ptr)
 {
-    I.NexGetInt("c1");
-}
-void P0b3PopCallback(void *ptr)
-{
-    I.NexGetInt("c2");
+  c2.getValue(&valor);
+  EEPROM.writeInt(4, valor);
+  EEPROM.commit()
 }
 NexTouch *nex_listen_list[] = {
     &b0,
-    &b1,
-    &P0b0,
-    &P0b1,
-    &P0b2,
-    &P0b3,
+    &h0,
+    &c0,
+    &c1,
+    &c2,
     NULL // String terminated
 };
-
 
 void leitura()
 {
@@ -88,30 +86,32 @@ void leitura()
   Vento2 = V2.getVent2();
 }
 
-
 void Controle_init()
 {
-CTRL.Set_hum_pwm_config(25, 5000, 0, 8);
-CTRL.Set_temp_pwm_config(17, 5000, 0, 8);
+  CTRL.Set_hum_pwm_config(25, 5000, 0, 8);
+  CTRL.Set_temp_pwm_config(17, 5000, 0, 8);
 }
-
 
 void setup()
 {
   nexInit();
   Wire.begin(33, 32);
+  EEPROM.begin(10);
   pinMode(14, INPUT_PULLUP);
   pinMode(13, INPUT_PULLUP);
   b0.attachPop(b0PopCallback, &b0);
-  b1.attachPop(b1PopCallback, &b1);
-  P0b0.attachPop(P0b0PopCallback, &P0b0);
-  P0b1.attachPop(P0b1PopCallback, &P0b1);
-  P0b2.attachPop(P0b2PopCallback, &P0b2);
-  P0b3.attachPop(P0b3PopCallback, &P0b3);
+  h0.attachPop(h0PopCallback);
+  c0.attachPop(c0PopCallback);
+  c1.attachPop(c1PopCallback);
+  c2.attachPop(c2PopCallback);
 
+  h0.setValue(EEPROM.readInt(1));
+  c0.setValue(EEPROM.readInt(2));
+  c1.setValue(EEPROM.readInt(3));
+  c2.setValue(EEPROM.readInt(4));
+  
   Controle_init();
 }
-
 
 void loop()
 {
