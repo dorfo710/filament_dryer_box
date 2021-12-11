@@ -116,7 +116,7 @@ void setup()
 void loop()
 {
   nexLoop(nex_listen_list);
-  if (H.Timer() == true && auxiliar == true)
+  if (H.Timer() == true)
   {
     leitura();
 
