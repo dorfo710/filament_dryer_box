@@ -52,19 +52,19 @@ void c0PopCallback(void *ptr)
 {
   c0.getValue(&valor);
   EEPROM.writeInt(2, valor);
-  EEPROM.commit()
+  EEPROM.commit();
 }
 void c1PopCallback(void *ptr)
 {
   c1.getValue(&valor);
   EEPROM.writeInt(3, valor);
-  EEPROM.commit()
+  EEPROM.commit();
 }
 void c2PopCallback(void *ptr)
 {
   c2.getValue(&valor);
   EEPROM.writeInt(4, valor);
-  EEPROM.commit()
+  EEPROM.commit();
 }
 NexTouch *nex_listen_list[] = {
     &b0,
