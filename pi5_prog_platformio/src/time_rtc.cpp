@@ -30,17 +30,20 @@ bool Hora::Timer()
     {
         return true;
     }
-    return false;
+    else
+        return false;
 }
-bool Hora::TimerVerifica(){
+bool Hora::TimerVerifica()
+{
     DateTime now = rtc.now();
     if (now.second() == 1 || now.second() == 21 || now.second() == 41)
     {
         return true;
     }
-    return false;
+    else
+        return false;
 }
-//vcc = 3.3v
-//gnd = gnd
-//sda = d33
-//scl = d32
+// vcc = 3.3v
+// gnd = gnd
+// sda = d33
+// scl = d32
