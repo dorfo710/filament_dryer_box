@@ -31,7 +31,6 @@ int Resistor;
 int Piezo;
 int Vento;
 int Vento2;
-bool auxiliar = false;
 uint32_t valor = 0;
 Controller CTRL;
 
@@ -120,18 +119,18 @@ void loop()
   {
     leitura();
 
-    int Temp, Umid;
-    Temp = L.getTemp();
-    Umid = L.getUmid();
-    I.NexPrint(String(Temp), "Temp");
-    I.NexPrint(String(Umid), "Umid");
+    Temperatura = L.getTemp();
+    Umidade = L.getUmid();
+    I.NexPrint(String(Temperatura), "Temp");
+    I.NexPrint(String(Umidade), "Umid");
     I.NexPrint(String(H.Atual()), "Hora");
+    L.SdCard(H.Atual, String(Umidade), String(Temperatura));
 
-    auxiliar = false;
+
 
     CTRL.Desired_temperature = I.TEMP;
     CTRL.Desired_humidity = I.UMID;
     CTRL.PID_CONTROLL(Temperatura, Umidade);
   }
-  auxiliar = H.TimerVerifica();
+
 }
