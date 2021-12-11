@@ -11,10 +11,6 @@ NexText TempP0 = NexText(0, 2, "temp");
 NexText UmidP0 = NexText(0, 7, "umid");
 NexText MostradorP0 = NexText(0, 18, "t10");
 
-NexCheckbox c0 = NexCheckbox(0, 13, "c0");
-NexCheckbox c1 = NexCheckbox(0, 14, "c1");
-NexCheckbox c2 = NexCheckbox(0, 15, "c2");
-NexSlider h0 = NexSlider(0, 5, "h0");
 //Page1
 NexText MostradorP1 = NexText(1, 4, "t10");
 
@@ -105,28 +101,7 @@ void Interface::NexPrint(String Valor, String Local)
     UmidP0.setText(conversao_S_C);
   }
 }
-int Interface::NexGetInt(String Item)
-{
 
-  uint32_t valor = 0;
-  if (Item == "h0")
-  {
-    h0.getValue(&valor);
-  }
-  if (Item == "c0")
-  {
-    c0.getValue(&valor);
-  }
-  if (Item == "c1")
-  {
-    c1.getValue(&valor);
-  }
-  if (Item == "c2")
-  {
-    c2.getValue(&valor);
-  }
-  return valor;
-}
 
 void Interface::Nexsettemp()
 {
