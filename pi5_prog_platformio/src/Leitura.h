@@ -22,6 +22,6 @@ public:        // Os métodos sao públicos
     int getPiezo();
     int getVent1();
     int getVent2();
-    void SdCard(String);
+    void SdCard(String, String, String);
 };
 #endif
