@@ -124,7 +124,7 @@ void loop()
     I.NexPrint(String(Temperatura), "Temp");
     I.NexPrint(String(Umidade), "Umid");
     I.NexPrint(String(H.Atual()), "Hora");
-    L.SdCard(H.Atual, String(Umidade), String(Temperatura));
+    L.SdCard(H.Atual(), String(Umidade), String(Temperatura));
 
 
 
