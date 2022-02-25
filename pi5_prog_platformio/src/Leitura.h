@@ -1,4 +1,4 @@
-//Só exemplos para começar :)
+// Só exemplos para começar :)
 
 #ifndef _Leitura_H_
 #define _Leitura_H_
@@ -12,12 +12,12 @@ private: // As variáveis membro são privadas (encapsulamento)
     int Resist, Piezo, Vent, Vent2;
 
 public:        // Os métodos sao públicos
-    Leitura(); //Construtores (sobrecarregado)
-    //Leitura(double, int);
-    //Leitura(double, double, int, int, int, int);
-    ~Leitura();           // Método Destrutor
-    double getTemp(); //Métodos Acessores getXXX
-    double getUmid();
+    Leitura(); // Construtores (sobrecarregado)
+    // Leitura(double, int);
+    // Leitura(double, double, int, int, int, int);
+    ~Leitura();      // Método Destrutor
+    float getTemp(); // Métodos Acessores getXXX
+    float getUmid();
     int getResist();
     int getPiezo();
     int getVent1();
