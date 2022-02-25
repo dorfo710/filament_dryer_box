@@ -21,5 +21,6 @@ public:
     void Control_temp(float);
     void Control_humidity(float);
     void PID_CONTROLL(double, double);
+    int func_PID_TEST(double, double);
 };
 #endif
