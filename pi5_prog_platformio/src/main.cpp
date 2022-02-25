@@ -1,6 +1,7 @@
 // Bibliotecas
 #include <Wire.h>
 #include <EEPROM.h>
+#include <PID_v1.h>
 #include "Nextion.h"
 // Funções
 #include "time_rtc.h"
@@ -33,6 +34,15 @@ int Vento;
 int Vento2;
 uint32_t valor = 0;
 Controller CTRL;
+
+// Globais Controle
+double Kp_t = 1, Ki_t = 0.01, Kd_t = 1;
+double Kp_h = 1, Ki_h = 0.01, Kd_h = 1;
+
+double Desired_temperature = 100.0;
+double pin_value_temperature = 0;
+double real_temperature = 0;
+PID myPID_temperature(&real_temperature, &pin_value_temperature, &Desired_temperature, Kp_t, Ki_t, Kd_t, DIRECT);
 
 void b0PopCallback(void *ptr)
 {
@@ -74,26 +84,10 @@ NexTouch *nex_listen_list[] = {
     NULL // String terminated
 };
 
-void leitura()
-{
-  Leitura T, U, R, P, V, V2, LSD;
-  Temperatura = T.getTemp();
-  Umidade = U.getUmid();
-  Resistor = R.getResist();
-  Piezo = P.getPiezo();
-  Vento = V.getVent1();
-  Vento2 = V2.getVent2();
-}
-
-void Controle_init()
-{
-  CTRL.Set_hum_pwm_config(25, 5000, 0, 8);
-  CTRL.Set_temp_pwm_config(17, 5000, 0, 8);
-}
-
 void setup()
 {
   nexInit();
+  /*
   Wire.begin(33, 32);
   EEPROM.begin(10);
   pinMode(14, INPUT_PULLUP);
@@ -108,29 +102,41 @@ void setup()
   c0.setValue(EEPROM.readInt(2));
   c1.setValue(EEPROM.readInt(3));
   c2.setValue(EEPROM.readInt(4));
-  
-  Controle_init();
+  */
+
+  // control begin setup
+  // control pwm setup
+  ledcAttachPin(17, 0);
+  ledcSetup(0, 5000, 8);
+  myPID_temperature.SetMode(AUTOMATIC);
+  // control end setup
+  Serial.begin(9600);
 }
 
 void loop()
 {
-  nexLoop(nex_listen_list);
-  if (H.Timer() == true)
-  {
-    leitura();
+  real_temperature = L.getTemp();
+  Serial.print("temp = ");
+  Serial.println(real_temperature);
 
-    Temperatura = L.getTemp();
-    Umidade = L.getUmid();
-    I.NexPrint(String(Temperatura), "Temp");
-    I.NexPrint(String(Umidade), "Umid");
-    I.NexPrint(String(H.Atual()), "Hora");
-    L.SdCard(H.Atual(), String(Umidade), String(Temperatura));
+  Umidade = L.getUmid();
+  Serial.print("humi = ");
+  Serial.println(Umidade);
+  delay(100);
 
+  // int pwm_duty = CTRL.func_PID_TEST(Temperatura, Umidade);
+  myPID_temperature.Compute();
+  Serial.println(pin_value_temperature);
+  ledcWrite(0, pin_value_temperature);
+  /*
+    nexLoop(nex_listen_list);
+    if (H.Timer() == true)
+    {
 
-
-    CTRL.Desired_temperature = I.TEMP;
-    CTRL.Desired_humidity = I.UMID;
-    CTRL.PID_CONTROLL(Temperatura, Umidade);
-  }
-
+      I.NexPrint(String(Temperatura), "Temp");
+      I.NexPrint(String(Umidade), "Umid");
+      I.NexPrint(String(H.Atual()), "Hora");
+      L.SdCard(H.Atual(), String(Umidade), String(Temperatura));
+    }
+  */
 }
