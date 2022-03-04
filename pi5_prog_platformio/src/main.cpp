@@ -39,10 +39,13 @@ Controller CTRL;
 double Kp_t = 1, Ki_t = 0.01, Kd_t = 1;
 double Kp_h = 1, Ki_h = 0.01, Kd_h = 1;
 
-double Desired_temperature = 100.0;
+double Desired_temperature = 100.0; // este é o valor pra mudar de acordo com a humidade desejada
 double pin_value_temperature = 0;
 double real_temperature = 0;
 PID myPID_temperature(&real_temperature, &pin_value_temperature, &Desired_temperature, Kp_t, Ki_t, Kd_t, DIRECT);
+
+double Desired_humidity = 100.0;
+const byte hum_gpio = 16;
 
 void b0PopCallback(void *ptr)
 {
@@ -106,9 +109,12 @@ void setup()
 
   // control begin setup
   // control pwm setup
-  ledcAttachPin(17, 0);
+  ledcAttachPin(17, 0); // gpio umidade = 17
   ledcSetup(0, 5000, 8);
   myPID_temperature.SetMode(AUTOMATIC);
+
+  pinMode(hum_gpio, OUTPUT);
+
   // control end setup
   Serial.begin(9600);
 }
@@ -122,6 +128,16 @@ void loop()
   Umidade = L.getUmid();
   Serial.print("humi = ");
   Serial.println(Umidade);
+
+  if (Umidade < Desired_humidity)
+  {
+    digitalWrite(hum_gpio, HIGH);
+  }
+  else
+  {
+    digitalWrite(hum_gpio, LOW);
+  }
+
   delay(100);
 
   // int pwm_duty = CTRL.func_PID_TEST(Temperatura, Umidade);
