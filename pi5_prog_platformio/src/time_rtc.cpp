@@ -7,21 +7,22 @@
 RTC_DS3231 rtc;
 
 using namespace std;
-
 int cond1vez = 0;
+
 Hora::Hora()
 {
+
 }
 
 void Hora::Ajustar(int ano, int mes, int dia, int hora, int minuto)
 {
-    rtc.adjust(DateTime(ano, mes, dia, hora, minuto, 0));
+  rtc.adjust(DateTime(ano, mes, dia, hora, minuto, 0));
 }
 String Hora::Atual()
 {
-    DateTime now = rtc.now();
-    String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute());
-    return Dados;
+  DateTime now = rtc.now();
+  String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute());
+  return Dados;
 }
 
 bool Hora::Timer()
@@ -40,7 +41,7 @@ bool Hora::Timer()
   }
 }
 
-// vcc = 3.3v
-// gnd = gnd
-// sda = d33
-// scl = d32
+//vcc = 3.3v
+//gnd = gnd
+//sda = d33
+//scl = d32
