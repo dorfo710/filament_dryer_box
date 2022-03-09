@@ -11,6 +11,7 @@ NexText TempP0 = NexText(0, 2, "temp");
 NexText UmidP0 = NexText(0, 7, "umid");
 NexText MostradorP0 = NexText(0, 18, "t10");
 
+
 //Page1
 NexText MostradorP1 = NexText(1, 4, "t10");
 
@@ -101,7 +102,9 @@ void Interface::NexPrint(String Valor, String Local)
     UmidP0.setText(conversao_S_C);
   }
 }
-
+int Interface::NexGetInt(String Item)
+{
+}
 
 void Interface::Nexsettemp()
 {
