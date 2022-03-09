@@ -2,11 +2,13 @@
 
 #include <iostream>
 #include "Leitura.h"
+#include "time_rtc.h"
 
 #include "SdFat.h"
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
+#include <Nextion.h>
 
 using namespace std;
 
@@ -63,19 +65,29 @@ Leitura::~Leitura()
 }
 
 // Métodos Acessores
-float Leitura::getTemp()
+double Leitura::getTemp()
 { // Recupera temperatura media
     int temperatura1 = dht1.readTemperature();
-    int temperatura2 = dht1.readTemperature();
+    int temperatura2 = dht2.readTemperature();
     Temp = (temperatura1 + temperatura2) / 2;
-    return Temp;
+    return temperatura2;
 }
-float Leitura::getUmid()
+double Leitura::getUmid()
 { // Recupera umidade media
     int umidade1 = dht1.readHumidity();
-    int umidade2 = dht1.readHumidity();
+    int umidade2 = dht2.readHumidity();
     Umid = (umidade1 + umidade2) / 2;
-    return Umid;
+    return umidade2;
+}
+int Leitura::getResist()
+{ // Recupera o estado da Resistência
+    Resist = digitalRead(Resistencia_Port);
+    return Resist;
+}
+int Leitura::getPiezo()
+{ // Recupera o valor do Piezo
+    Piezo = digitalRead(Piezo_Port);
+    return Piezo;
 }
 int Leitura::getVent1()
 { // Recupera o valor da ventoinha 1
