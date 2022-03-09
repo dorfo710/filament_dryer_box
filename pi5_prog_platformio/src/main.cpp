@@ -1,13 +1,14 @@
 // Bibliotecas
 #include <Wire.h>
 #include <EEPROM.h>
-#include <PID_v1.h>
 #include "Nextion.h"
 // Funções
 #include "time_rtc.h"
-#include "Controller.h"
+#include <PID_v1.h>
+//#include "Controller.h"
 #include "Leitura.h"
 #include "Interface.h"
+#include "controller.h"
 
 uint32_t ds_var;
 // Objetos
@@ -32,20 +33,26 @@ int Resistor;
 int Piezo;
 int Vento;
 int Vento2;
+bool auxiliar = true;
 uint32_t valor = 0;
+int Temp, Umid;
 Controller CTRL;
 
 // Globais Controle
 double Kp_t = 1, Ki_t = 0.01, Kd_t = 1;
 double Kp_h = 1, Ki_h = 0.01, Kd_h = 1;
 
-double Desired_temperature = 100.0; // este é o valor pra mudar de acordo com a humidade desejada
+bool controll_humitidy_enable = true;    // toggle to enable or disable the humidity control
+bool controll_temperature_enable = true; // toggle to enable or disable the temperature control
+// bool advanced_mode = false;
+
+double Desired_temperature = 100.0; // change to set the target temperature
 double pin_value_temperature = 0;
-double real_temperature = 0;
+double real_temperature = 0; // placeholder for initialization of the sensor dht
 PID myPID_temperature(&real_temperature, &pin_value_temperature, &Desired_temperature, Kp_t, Ki_t, Kd_t, DIRECT);
 
-double Desired_humidity = 100.0;
-const byte hum_gpio = 16;
+double Desired_humidity = 100.0; // change to set the target humidity
+const byte hum_gpio = 3;         // gpio of the piezo pin
 
 void b0PopCallback(void *ptr)
 {
@@ -90,7 +97,6 @@ NexTouch *nex_listen_list[] = {
 void setup()
 {
   nexInit();
-  /*
   Wire.begin(33, 32);
   EEPROM.begin(10);
   pinMode(14, INPUT_PULLUP);
@@ -105,54 +111,83 @@ void setup()
   c0.setValue(EEPROM.readInt(2));
   c1.setValue(EEPROM.readInt(3));
   c2.setValue(EEPROM.readInt(4));
-  */
 
+  Temp = L.getTemp();
+  Umid = L.getUmid();
   // control begin setup
   // control pwm setup
-  ledcAttachPin(17, 0); // gpio umidade = 17
+  ledcAttachPin(1, 0); // gpio temperatura = 17
   ledcSetup(0, 5000, 8);
   myPID_temperature.SetMode(AUTOMATIC);
 
   pinMode(hum_gpio, OUTPUT);
 
   // control end setup
-  Serial.begin(9600);
+  // Serial.begin(9600);
 }
 
 void loop()
 {
   real_temperature = L.getTemp();
-  Serial.print("temp = ");
-  Serial.println(real_temperature);
+  // Serial.print("temp = ");
+  // Serial.println(real_temperature);
 
   Umidade = L.getUmid();
-  Serial.print("humi = ");
-  Serial.println(Umidade);
+  // Serial.print("humi = ");
+  // Serial.println(Umidade);
 
-  if (Umidade < Desired_humidity)
+  if (controll_temperature_enable and !controll_humitidy_enable)
   {
-    digitalWrite(hum_gpio, HIGH);
-  }
-  else
-  {
+    myPID_temperature.Compute();
+    Serial.println(pin_value_temperature);
+    ledcWrite(0, pin_value_temperature);
     digitalWrite(hum_gpio, LOW);
   }
 
-  delay(100);
-
-  // int pwm_duty = CTRL.func_PID_TEST(Temperatura, Umidade);
-  myPID_temperature.Compute();
-  Serial.println(pin_value_temperature);
-  ledcWrite(0, pin_value_temperature);
-  /*
-    nexLoop(nex_listen_list);
-    if (H.Timer() == true)
+  if (controll_humitidy_enable and !controll_temperature_enable)
+  {
+    if (Umidade < Desired_humidity)
     {
-
-      I.NexPrint(String(Temperatura), "Temp");
-      I.NexPrint(String(Umidade), "Umid");
-      I.NexPrint(String(H.Atual()), "Hora");
-      L.SdCard(H.Atual(), String(Umidade), String(Temperatura));
+      digitalWrite(hum_gpio, HIGH);
+      Desired_temperature = 0;
+      myPID_temperature.Compute();
+      Serial.println(pin_value_temperature);
+      ledcWrite(0, pin_value_temperature);
     }
-  */
+    else
+    {
+      digitalWrite(hum_gpio, LOW);
+      Desired_temperature = 100;
+      myPID_temperature.Compute();
+      Serial.println(pin_value_temperature);
+      ledcWrite(0, pin_value_temperature);
+    }
+  }
+
+  if (controll_humitidy_enable and controll_temperature_enable)
+  {
+    myPID_temperature.Compute();
+    Serial.println(pin_value_temperature);
+    ledcWrite(0, pin_value_temperature);
+    if (Umidade < Desired_humidity)
+    {
+      digitalWrite(hum_gpio, HIGH);
+    }
+    else
+    {
+      digitalWrite(hum_gpio, LOW);
+    }
+  }
+  nexLoop(nex_listen_list);
+  if (H.Timer() == true)
+  {
+    Temp = L.getTemp();
+    Umid = L.getUmid();
+    I.NexPrint(String(Temp), "Temp");
+    I.NexPrint(String(Umid), "Umid");
+    I.NexPrint(String(H.Atual()), "Hora");
+    // L.SdCard(H.Atual(), String(Umid), String(Temp));
+    // I.NexPrint("10:11 08/12/2021", "Hora");
+  }
+  // delay(10000);
 }
