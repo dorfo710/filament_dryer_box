@@ -1,0 +1,6 @@
+  Serial.println("\n \n \n");
+  Serial.println("(▀̿Ĺ̯▀̿) Instrunção ✍(◔◡◔)");
+  Serial.println("Para gravar outros valores de ciclo,\ndigite na caixa serial 'T' e o tempo desejado em milisegundos.");
+  Serial.println("Exemplo, T1000 para 1000 milisegundos, 1 segundo (>‿◠)✌");
+  Serial.println("Tempo maximo pode ser ajustado até 2 horas e 46 minutos ♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪"); // tem que aumentar esse tempo de algum jeito
+  
