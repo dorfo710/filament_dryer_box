@@ -10,6 +10,7 @@ class Leitura
 private: // As variáveis membro são privadas (encapsulamento)
     double Temp, Umid;
     int Resist, Piezo, Vent, Vent2;
+    String Dados;
 
 public:        // Os métodos sao públicos
     Leitura(); //Construtores (sobrecarregado)
