@@ -21,20 +21,20 @@ void Hora::Ajustar(int ano, int mes, int dia, int hora, int minuto)
 String Hora::Atual()
 {
   DateTime now = rtc.now();
-  String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute());
+  String Dados = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year()) + " " + String(now.hour()) + ":" + String(now.minute()) + ":" + String(now.second());
   return Dados;
 }
 
 bool Hora::Timer()
 {
   DateTime now = rtc.now();
-  if (now.second() == 0 || now.second() == 20 || now.second() == 40) {
+  if (now.second() == 0 || now.second() == 5 || now.second() == 10 || now.second() == 15 ||  now.second() == 20 ||  now.second() == 25 || now.second() == 30 || now.second() == 35 || now.second() == 40 ||  now.second() == 45 || now.second() == 50 || now.second() == 55) {
     if (cond1vez == 1) {
       cond1vez = 0;
       return true;
     }
   }
-  if (now.second() == 1 || now.second() == 21 || now.second() == 41)
+  if (now.second() == 1 || now.second() == 6 || now.second() == 11 || now.second() == 16 ||  now.second() == 21 ||  now.second() == 26 || now.second() == 31 || now.second() == 36 || now.second() == 41 ||  now.second() == 46 || now.second() == 51 || now.second() == 56)
   {
     cond1vez = 1;
     return false;
