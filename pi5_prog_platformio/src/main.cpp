@@ -5,7 +5,6 @@
 // Funções
 #include "time_rtc.h"
 #include <PID_v1.h>
-//#include "Controller.h"
 #include "Leitura.h"
 #include "Interface.h"
 #include "controller.h"
@@ -18,10 +17,10 @@ Leitura L;   // L objeto da classe Leitura
 
 // Nextion
 // P0
-NexSlider h0 = NexSlider(0, 4, "h0");
-NexCheckbox c0 = NexCheckbox(0, 12, "c0");
-NexCheckbox c1 = NexCheckbox(0, 13, "c1");
-NexCheckbox c2 = NexCheckbox(0, 14, "c2");
+NexSlider h0 = NexSlider(0, 3, "h0");
+NexSlider h1 = NexSlider(0, 20, "h1");
+NexDSButton bt0 = NexDSButton(0, 23, "bt0");
+NexDSButton b01 = NexDSButton(0, 24, "bt1");
 
 // P3
 NexButton b0 = NexButton(3, 26, "b14");
@@ -64,33 +63,43 @@ void b0PopCallback(void *ptr)
 void h0PopCallback(void *ptr)
 {
   h0.getValue(&valor);
+  I.NexPrint((String)valor, "Hora");
   EEPROM.writeInt(1, valor);
   EEPROM.commit();
 }
-void c0PopCallback(void *ptr)
+
+void h1PopCallback(void *ptr)
 {
-  c0.getValue(&valor);
-  EEPROM.writeInt(2, valor);
+  h1.getValue(&valor);
+  I.NexPrint((String)valor, "Hora");
+  EEPROM.writeInt(1, valor);
   EEPROM.commit();
 }
-void c1PopCallback(void *ptr)
+
+void bt0PopCallback(void *ptr)
 {
-  c1.getValue(&valor);
-  EEPROM.writeInt(3, valor);
-  EEPROM.commit();
+  uint32_t dual_state;
+  NexDSButton *btn = (NexDSButton *)ptr;
+  bt0.getValue(&dual_state);
+  I.NexPrint(String(dual_state), "Hora");
+  controll_humitidy_enable = dual_state;
 }
-void c2PopCallback(void *ptr)
+
+void b01PopCallback(void *ptr)
 {
-  c2.getValue(&valor);
-  EEPROM.writeInt(4, valor);
-  EEPROM.commit();
+  uint32_t dual_state;
+  NexDSButton *btn = (NexDSButton *)ptr;
+  b01.getValue(&dual_state);
+  I.NexPrint(String(dual_state), "Hora");
+  controll_temperature_enable = dual_state;
 }
+
 NexTouch *nex_listen_list[] = {
     &b0,
+    &bt0,
+    &b01,
     &h0,
-    &c0,
-    &c1,
-    &c2,
+    &h1,
     NULL // String terminated
 };
 
@@ -102,18 +111,18 @@ void setup()
   pinMode(14, INPUT_PULLUP);
   pinMode(13, INPUT_PULLUP);
   b0.attachPop(b0PopCallback, &b0);
+  bt0.attachPop(bt0PopCallback, &bt0);
+  b01.attachPop(b01PopCallback, &b01);
   h0.attachPop(h0PopCallback);
-  c0.attachPop(c0PopCallback);
-  c1.attachPop(c1PopCallback);
-  c2.attachPop(c2PopCallback);
+  h1.attachPop(h1PopCallback);
 
   h0.setValue(EEPROM.readInt(1));
-  c0.setValue(EEPROM.readInt(2));
-  c1.setValue(EEPROM.readInt(3));
-  c2.setValue(EEPROM.readInt(4));
 
   Temp = L.getTemp();
   Umid = L.getUmid();
+  I.NexPrint(String(Temp), "Temp");
+  I.NexPrint(String(Umid), "Umid");
+  I.NexPrint(String(H.Atual()), "Hora");
   // control begin setup
   // control pwm setup
   ledcAttachPin(1, 0); // gpio temperatura = 17
@@ -121,9 +130,6 @@ void setup()
   myPID_temperature.SetMode(AUTOMATIC);
 
   pinMode(hum_gpio, OUTPUT);
-
-  // control end setup
-  // Serial.begin(9600);
 }
 
 void loop()
@@ -178,6 +184,7 @@ void loop()
       digitalWrite(hum_gpio, LOW);
     }
   }
+
   nexLoop(nex_listen_list);
   if (H.Timer() == true)
   {
@@ -186,8 +193,6 @@ void loop()
     I.NexPrint(String(Temp), "Temp");
     I.NexPrint(String(Umid), "Umid");
     I.NexPrint(String(H.Atual()), "Hora");
-    // L.SdCard(H.Atual(), String(Umid), String(Temp));
-    // I.NexPrint("10:11 08/12/2021", "Hora");
+    L.SdCard(H.Atual(), String(Umid), String(Temp));
   }
-  // delay(10000);
 }
