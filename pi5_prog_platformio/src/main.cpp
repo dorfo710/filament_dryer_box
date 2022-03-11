@@ -18,7 +18,7 @@ Leitura L;   // L objeto da classe Leitura
 // Nextion
 // P0
 NexSlider h0 = NexSlider(0, 3, "h0");
-NexSlider h1 = NexSlider(0, 20, "h1");
+NexSlider h1 = NexSlider(0, 19, "h1");
 NexDSButton bt0 = NexDSButton(0, 23, "bt0");
 NexDSButton bt1 = NexDSButton(0, 24, "bt1");
 
@@ -38,11 +38,11 @@ int Temp, Umid;
 Controller CTRL;
 
 // Globais Controle
-double Kp_t = 1, Ki_t = 0.01, Kd_t = 1;
-double Kp_h = 1, Ki_h = 0.01, Kd_h = 1;
+double Kp_t = 2.5, Ki_t = 0.0000001, Kd_t = 1;
+double Kp_h = 2.5, Ki_h = 0.0000001, Kd_h = 1;
 
-bool controll_humitidy_enable = true;    // toggle to enable or disable the humidity control
-bool controll_temperature_enable = true; // toggle to enable or disable the temperature control
+int controll_humitidy_enable = 0;    // toggle to enable or disable the humidity control
+int controll_temperature_enable = 0; // toggle to enable or disable the temperature control
 // bool advanced_mode = false;
 
 double Desired_temperature = 100.0; // change to set the target temperature
@@ -63,37 +63,18 @@ void b0PopCallback(void *ptr)
 void h0PopCallback(void *ptr)
 {
   h0.getValue(&valor);
-  I.NexPrint((String)valor, "Hora");
-  EEPROM.writeInt(1, valor);
+  EEPROM.writeInt(10, valor);
   EEPROM.commit();
+  Desired_temperature = valor;
 }
 
 void h1PopCallback(void *ptr)
 {
   h1.getValue(&valor);
-  I.NexPrint((String)valor, "Hora");
-  EEPROM.writeInt(1, valor);
+  EEPROM.writeInt(20, valor);
   EEPROM.commit();
+  Desired_humidity = valor;
 }
-
-void bt0PopCallback(void *ptr)
-{
-  uint32_t dual_state;
-  NexDSButton *btn = (NexDSButton *)ptr;
-  bt0.getValue(&dual_state);
-  I.NexPrint(String(dual_state), "Hora");
-  controll_humitidy_enable = dual_state;
-}
-
-void bt1PopCallback(void *ptr)
-{
-  uint32_t dual_state;
-  NexDSButton *btn = (NexDSButton *)ptr;
-  bt1.getValue(&dual_state);
-  I.NexPrint(String(dual_state), "Hora");
-  controll_temperature_enable = dual_state;
-}
-
 NexTouch *nex_listen_list[] = {
     &b0,
     &bt0,
@@ -107,16 +88,30 @@ void setup()
 {
   nexInit();
   Wire.begin(33, 32);
-  EEPROM.begin(10);
+  EEPROM.begin(50);
   pinMode(14, INPUT_PULLUP);
   pinMode(13, INPUT_PULLUP);
   b0.attachPop(b0PopCallback, &b0);
-  bt0.attachPop(bt0PopCallback, &bt0);
-  bt1.attachPop(bt1PopCallback, &bt1);
   h0.attachPop(h0PopCallback);
   h1.attachPop(h1PopCallback);
 
-  h0.setValue(EEPROM.readInt(1));
+  nexSerial.print("page0.Barra.val=");
+  nexSerial.print(EEPROM.readInt(10));
+  nexSerial.write(0xff);
+  nexSerial.write(0xff);
+  nexSerial.write(0xff);
+  nexSerial.print("page0.BarraUmid.val=");
+  nexSerial.print(EEPROM.readInt(20));
+  nexSerial.write(0xff);
+  nexSerial.write(0xff);
+  nexSerial.write(0xff);
+  nexSerial.print("page page0");
+  nexSerial.write(0xff);
+  nexSerial.write(0xff);
+  nexSerial.write(0xff);
+
+  h0.setValue(EEPROM.readInt(10));
+  h1.setValue(EEPROM.readInt(20));
 
   Temp = L.getTemp();
   Umid = L.getUmid();
@@ -130,6 +125,7 @@ void setup()
   myPID_temperature.SetMode(AUTOMATIC);
 
   pinMode(hum_gpio, OUTPUT);
+  pinMode(26, OUTPUT);
 }
 
 void loop()
@@ -141,48 +137,17 @@ void loop()
   Umidade = L.getUmid();
   // Serial.print("humi = ");
   // Serial.println(Umidade);
-
-  if (controll_temperature_enable and !controll_humitidy_enable)
+  digitalWrite(26, HIGH); // liga a ventuinha
+  myPID_temperature.Compute();
+  Serial.println(pin_value_temperature);
+  ledcWrite(0, pin_value_temperature);
+  if (Umidade < Desired_humidity)
   {
-    myPID_temperature.Compute();
-    Serial.println(pin_value_temperature);
-    ledcWrite(0, pin_value_temperature);
+    digitalWrite(hum_gpio, HIGH);
+  }
+  else
+  {
     digitalWrite(hum_gpio, LOW);
-  }
-
-  if (controll_humitidy_enable and !controll_temperature_enable)
-  {
-    if (Umidade < Desired_humidity)
-    {
-      digitalWrite(hum_gpio, HIGH);
-      Desired_temperature = 0;
-      myPID_temperature.Compute();
-      Serial.println(pin_value_temperature);
-      ledcWrite(0, pin_value_temperature);
-    }
-    else
-    {
-      digitalWrite(hum_gpio, LOW);
-      Desired_temperature = 100;
-      myPID_temperature.Compute();
-      Serial.println(pin_value_temperature);
-      ledcWrite(0, pin_value_temperature);
-    }
-  }
-
-  if (controll_humitidy_enable and controll_temperature_enable)
-  {
-    myPID_temperature.Compute();
-    Serial.println(pin_value_temperature);
-    ledcWrite(0, pin_value_temperature);
-    if (Umidade < Desired_humidity)
-    {
-      digitalWrite(hum_gpio, HIGH);
-    }
-    else
-    {
-      digitalWrite(hum_gpio, LOW);
-    }
   }
 
   nexLoop(nex_listen_list);
