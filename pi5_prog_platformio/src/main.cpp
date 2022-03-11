@@ -112,6 +112,8 @@ void setup()
 
   h0.setValue(EEPROM.readInt(10));
   h1.setValue(EEPROM.readInt(20));
+  Desired_temperature = EEPROM.readInt(10);
+  Desired_humidity = EEPROM.readInt(20);
 
   Temp = L.getTemp();
   Umid = L.getUmid();
