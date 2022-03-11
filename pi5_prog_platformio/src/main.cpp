@@ -20,7 +20,7 @@ Leitura L;   // L objeto da classe Leitura
 NexSlider h0 = NexSlider(0, 3, "h0");
 NexSlider h1 = NexSlider(0, 20, "h1");
 NexDSButton bt0 = NexDSButton(0, 23, "bt0");
-NexDSButton b01 = NexDSButton(0, 24, "bt1");
+NexDSButton bt1 = NexDSButton(0, 24, "bt1");
 
 // P3
 NexButton b0 = NexButton(3, 26, "b14");
@@ -85,11 +85,11 @@ void bt0PopCallback(void *ptr)
   controll_humitidy_enable = dual_state;
 }
 
-void b01PopCallback(void *ptr)
+void bt1PopCallback(void *ptr)
 {
   uint32_t dual_state;
   NexDSButton *btn = (NexDSButton *)ptr;
-  b01.getValue(&dual_state);
+  bt1.getValue(&dual_state);
   I.NexPrint(String(dual_state), "Hora");
   controll_temperature_enable = dual_state;
 }
@@ -97,7 +97,7 @@ void b01PopCallback(void *ptr)
 NexTouch *nex_listen_list[] = {
     &b0,
     &bt0,
-    &b01,
+    &bt1,
     &h0,
     &h1,
     NULL // String terminated
@@ -112,7 +112,7 @@ void setup()
   pinMode(13, INPUT_PULLUP);
   b0.attachPop(b0PopCallback, &b0);
   bt0.attachPop(bt0PopCallback, &bt0);
-  b01.attachPop(b01PopCallback, &b01);
+  bt1.attachPop(bt1PopCallback, &bt1);
   h0.attachPop(h0PopCallback);
   h1.attachPop(h1PopCallback);
 
