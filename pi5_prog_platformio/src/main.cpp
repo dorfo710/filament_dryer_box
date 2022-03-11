@@ -63,7 +63,7 @@ void b0PopCallback(void *ptr)
 void h0PopCallback(void *ptr)
 {
   h0.getValue(&valor);
-  I.NexPrint((String)valor, "Hora");
+  //I.NexPrint((String)valor, "Hora");
   EEPROM.writeInt(1, valor);
   EEPROM.commit();
 }
@@ -71,7 +71,7 @@ void h0PopCallback(void *ptr)
 void h1PopCallback(void *ptr)
 {
   h1.getValue(&valor);
-  I.NexPrint((String)valor, "Hora");
+  //I.NexPrint((String)valor, "Hora");
   EEPROM.writeInt(1, valor);
   EEPROM.commit();
 }
@@ -81,7 +81,7 @@ void bt0PopCallback(void *ptr)
   uint32_t dual_state;
   NexDSButton *btn = (NexDSButton *)ptr;
   bt0.getValue(&dual_state);
-  I.NexPrint(String(dual_state), "Hora");
+  //I.NexPrint(String(dual_state), "Hora");
   controll_humitidy_enable = dual_state;
 }
 
@@ -90,7 +90,7 @@ void b01PopCallback(void *ptr)
   uint32_t dual_state;
   NexDSButton *btn = (NexDSButton *)ptr;
   b01.getValue(&dual_state);
-  I.NexPrint(String(dual_state), "Hora");
+  //I.NexPrint(String(dual_state), "Hora");
   controll_temperature_enable = dual_state;
 }
 
