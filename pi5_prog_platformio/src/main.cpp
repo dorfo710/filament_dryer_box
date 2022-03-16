@@ -89,8 +89,8 @@ void setup()
   nexInit();
   Wire.begin(33, 32);
   EEPROM.begin(50);
-  pinMode(14, INPUT_PULLUP);
-  pinMode(13, INPUT_PULLUP);
+  pinMode(5, INPUT_PULLUP);//14
+  pinMode(18, INPUT_PULLUP);//13
   b0.attachPop(b0PopCallback, &b0);
   h0.attachPop(h0PopCallback);
   h1.attachPop(h1PopCallback);
@@ -127,7 +127,7 @@ void setup()
   myPID_temperature.SetMode(AUTOMATIC);
 
   pinMode(hum_gpio, OUTPUT);
-  pinMode(26, OUTPUT);
+  pinMode(15, OUTPUT);//26
 }
 
 void loop()
@@ -139,7 +139,7 @@ void loop()
   Umidade = L.getUmid();
   // Serial.print("humi = ");
   // Serial.println(Umidade);
-  digitalWrite(26, HIGH); // liga a ventuinha
+  digitalWrite(15, HIGH); // liga a ventuinha
   myPID_temperature.Compute();
   Serial.println(pin_value_temperature);
   ledcWrite(0, pin_value_temperature);
