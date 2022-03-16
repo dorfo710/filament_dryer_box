@@ -98,8 +98,8 @@ void setup()
   nexInit();
   Wire.begin(33, 32);
   EEPROM.begin(10);
-  pinMode(14, INPUT_PULLUP);
-  pinMode(13, INPUT_PULLUP);
+  pinMode(5, INPUT_PULLUP); //14
+  pinMode(18, INPUT_PULLUP); //13
   b0.attachPop(b0PopCallback, &b0);
   h0.attachPop(h0PopCallback);
   c0.attachPop(c0PopCallback);
