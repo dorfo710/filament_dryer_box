@@ -91,6 +91,7 @@ void setup()
   EEPROM.begin(50);
   pinMode(5, INPUT_PULLUP);//14
   pinMode(18, INPUT_PULLUP);//13
+  pinMode(15, OUTPUT);
   b0.attachPop(b0PopCallback, &b0);
   h0.attachPop(h0PopCallback);
   h1.attachPop(h1PopCallback);
@@ -145,11 +146,21 @@ void loop()
   ledcWrite(0, pin_value_temperature);
   if (Umidade < Desired_humidity)
   {
-    digitalWrite(hum_gpio, HIGH);
+    //digitalWrite(hum_gpio, HIGH);
+    digitalWrite(15, HIGH);
+    delay(1000);
+    digitalWrite(15, LOW);
   }
   else
   {
-    digitalWrite(hum_gpio, LOW);
+    //digitalWrite(hum_gpio, LOW);
+    digitalWrite(15, HIGH);
+    delay(100);
+    digitalWrite(15, LOW);
+    delay(400);
+    digitalWrite(15, HIGH);
+    delay(100);
+    digitalWrite(15, LOW);
   }
 
   nexLoop(nex_listen_list);
