@@ -62,14 +62,14 @@ double Leitura::getTemp()
   int temperatura1 = dht1.readTemperature();
   int temperatura2 = dht2.readTemperature();
   Temp = (temperatura1 + temperatura2) / 2;
-  return temperatura2;
+  return Temp;
 }
 double Leitura::getUmid()
 { //Recupera umidade media
   int umidade1 = dht1.readHumidity();
   int umidade2 = dht2.readHumidity();
   Umid = (umidade1 + umidade2) / 2;
-  return umidade2;
+  return Umid;
 }
 int Leitura::getResist()
 { //Recupera o estado da Resistência
