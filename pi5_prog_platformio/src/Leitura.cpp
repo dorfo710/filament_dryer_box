@@ -17,8 +17,8 @@ using namespace std;
 #define Vent1_port 15//26
 #define Vent2_port 15//27
 
-#define DHTPIN 5//13     //PINO DIGITAL UTILIZADO PELO DHT22
-#define DHTPIN2 18//14
+#define DHTPIN 12//13     //PINO DIGITAL UTILIZADO PELO DHT22
+#define DHTPIN2 13//14
 #define DHTTYPE DHT22 //DEFINE O MODELO DO SENSOR (DHT22 / AM2302)
 
 
@@ -27,7 +27,7 @@ DHT dht2(DHTPIN2, DHTTYPE);
 
 SdFat sdCard;
 SdFile meuArquivo;
-const int chipSelect = 27;//5;
+const int chipSelect = 5;//5;
 
 
 //Construtor padrão não recebe nenhum parâmetro
