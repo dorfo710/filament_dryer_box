@@ -38,8 +38,8 @@ int Temp, Umid;
 Controller CTRL;
 
 // Globais Controle
-double Kp_t = 2.5, Ki_t = 0.0000001, Kd_t = 1;
-double Kp_h = 2.5, Ki_h = 0.0000001, Kd_h = 1;
+double Kp_t = 2.5, Ki_t = 0.0000001, Kd_t = 0.00000001;
+double Kp_h = 1.0, Ki_h = 0.0000001, Kd_h = 0.00000001;
 
 int controll_humitidy_enable = 0;    // toggle to enable or disable the humidity control
 int controll_temperature_enable = 0; // toggle to enable or disable the temperature control
@@ -48,10 +48,13 @@ int controll_temperature_enable = 0; // toggle to enable or disable the temperat
 double Desired_temperature = 100.0; // change to set the target temperature
 double pin_value_temperature = 0;
 double real_temperature = 0; // placeholder for initialization of the sensor dht
+double real_temperature_temporary;
+double Umidade_temporary;
 PID myPID_temperature(&real_temperature, &pin_value_temperature, &Desired_temperature, Kp_t, Ki_t, Kd_t, DIRECT);
 
 double Desired_humidity = 100.0; // change to set the target humidity
-const byte hum_gpio = 3;         // gpio of the piezo pin
+const byte hum_gpio = 2;         // gpio of the piezo pin
+bool um_state = false;
 
 void b0PopCallback(void *ptr)
 {
@@ -86,6 +89,8 @@ NexTouch *nex_listen_list[] = {
 
 void setup()
 {
+  real_temperature = 30;
+  Umidade = 30;
   nexInit();
   Wire.begin(33, 32);
   EEPROM.begin(50);
@@ -127,39 +132,53 @@ void setup()
   myPID_temperature.SetMode(AUTOMATIC);
 
   pinMode(hum_gpio, OUTPUT);
-  pinMode(26, OUTPUT);
+  pinMode(15, OUTPUT);
+  // GPIO.func_out_sel_cfg[1].inv_sel = 1;
 }
 
 void loop()
 {
-  real_temperature = L.getTemp();
-  // Serial.print("temp = ");
-  // Serial.println(real_temperature);
-
-  Umidade = L.getUmid();
-  // Serial.print("humi = ");
-  // Serial.println(Umidade);
-  digitalWrite(26, HIGH); // liga a ventuinha
-  myPID_temperature.Compute();
-  Serial.println(pin_value_temperature);
-  ledcWrite(0, pin_value_temperature);
-  if (Umidade < Desired_humidity)
-  {
-    digitalWrite(hum_gpio, HIGH);
-  }
-  else
-  {
-    digitalWrite(hum_gpio, LOW);
-  }
-
   nexLoop(nex_listen_list);
   if (H.Timer() == true)
   {
     Temp = L.getTemp();
     Umid = L.getUmid();
+    real_temperature = Temp;
+    Umidade = Umid;
     I.NexPrint(String(Temp), "Temp");
     I.NexPrint(String(Umid), "Umid");
     I.NexPrint(String(H.Atual()), "Hora");
     L.SdCard(H.Atual(), String(Umid), String(Temp));
+  }
+  digitalWrite(15, HIGH); // liga a ventuinha
+  myPID_temperature.Compute();
+  Serial.println(pin_value_temperature);
+  ledcWrite(0, pin_value_temperature);
+  if (Umidade < Desired_humidity)
+  {
+    if (um_state == false)
+    {
+      delay(200);
+      digitalWrite(hum_gpio, HIGH);
+      delay(1000);
+      digitalWrite(hum_gpio, LOW);
+      um_state = true;
+    }
+  }
+  else
+  {
+    if (um_state == true)
+    {
+      delay(200);
+      digitalWrite(hum_gpio, HIGH);
+      delay(400);
+      digitalWrite(hum_gpio, LOW);
+      delay(400);
+      digitalWrite(hum_gpio, HIGH);
+      delay(400);
+      digitalWrite(hum_gpio, LOW);
+      delay(200);
+      um_state = false;
+    }
   }
 }
