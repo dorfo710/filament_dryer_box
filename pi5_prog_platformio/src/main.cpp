@@ -37,9 +37,9 @@ uint32_t valor = 0;
 int Temp, Umid;
 Controller CTRL;
 
-// Globais Controle
-double Kp_t = 2.5, Ki_t = 0.0000001, Kd_t = 0.00000001;
-double Kp_h = 1.0, Ki_h = 0.0000001, Kd_h = 0.00000001;
+// Globais Controle  //derivativo setar 0
+double Kp_t = 1.0, Ki_t = 0.0, Kd_t = 0.0;
+// double Kp_h = 1.0, Ki_h = 0.0000001, Kd_h = 0.00000001;
 
 int controll_humitidy_enable = 0;    // toggle to enable or disable the humidity control
 int controll_temperature_enable = 0; // toggle to enable or disable the temperature control
